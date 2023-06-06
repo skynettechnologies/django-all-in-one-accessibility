@@ -1,12 +1,10 @@
 =====
-Django All in One Accessibility
+#Django All in One Accessibility
 =====
 
-Django All in One Accessibility is a django App based on assistive technology that helps organizations enhance the accessibility and usability of their website
+##Django All in One Accessibility is a django App based on assistive technology that helps organizations enhance the accessibility and usability of their website Detailed documentation is in the "docs" directory.
 
-Detailed documentation is in the "docs" directory.
-
-Quick start
+###Quick start
 -----------
 
 1. Add "accessibility" to your INSTALLED_APPS setting like this::
