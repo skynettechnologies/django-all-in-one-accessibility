@@ -1,0 +1,4 @@
+name = django-all-in-one-accessibility
+version = 1.0
+description = A Django App based on assistive technology that helps organizations enhance the accessibility and usability of their website
+long_description = file: README.rst
