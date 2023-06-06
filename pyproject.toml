@@ -1,0 +1,18 @@
+[project]
+name = "django-accessibility"
+version = "1.0"
+authors = [
+  { name="Skynet Technologies USA LLC", email="developer3@skynettechnologies.com" },
+]
+description = "A Django App based on assistive technology that helps organizations enhance the accessibility and usability of their website"
+readme = "README.rst"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[build-system]
+requires = ['setuptools>=40.8.0']
+build-backend = 'setuptools.build_meta'
