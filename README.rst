@@ -1,21 +1,21 @@
 # All in One Accessibility
 - All in One Accessibility widget improves django website ADA compliance and browser experience for WCAG 2.1, ATAG 2.0, ADA, Section 508, Australian DDA, European EAA EN 301 549, UK Equality Act (EA), Israeli Standard 5568, and California Unruh standards.
 - 2 Minute installation
-- Screen Reader, dynamic widget color and position, supports multiple languages (36 languages)
+- Screen Reader, dynamic widget color and position, supports multiple languages (40 languages)
 - Reduces the risk of time-consuming accessibility lawsuits.
 - Use apps to connect to external services and manage data flows
 
 It uses the accessibility interface which handles UI and design related adjustments. All in One Accessibility app enhances your Django website accessibility to people with hearing or vision impairments, motor impaired, color blind, dyslexia, cognitive & learning impairments, seizure and epileptic, and ADHD problems. It uses the accessibility interface which handles UI and design related adjustments.
 
-[`django-all-in-one-accessibility-tutorial`](https://www.youtube.com/watch?v=PPQMWSzroAA) - Tutorial of All in One Accessibility widget .
+[`django-all-in-one-accessibility-introduction`](https://www.youtube.com/watch?v=PPQMWSzroAA) - introduction of All in One Accessibility widget .
 
 ---
 
 ## Installation
 -   Run `pip install django-all-in-one-accessibility==1.0`
--   Add `accessibility` to `settings.INSTALLED_APPS`
--   Add `accessibility.context_processors.admin_AIOA` to `settings.TEMPLATES context_processors`
--   Add `<script id="aioa-adawidget" src="{{ AIOA_URL }}"></script>` to `put this line in your base.html footer`
+-   Add `accessibility` in `settings.INSTALLED_APPS`
+-   Add `accessibility.context_processors.admin_AIOA` in `settings.TEMPLATES context_processors`
+-   Add `<script id="aioa-adawidget" src="{{ AIOA_URL }}"></script>`put this line in your base.html footer
 -   Run `python manage.py migrate`
 -   Run `python manage.py runserver` for Restart your application server
 
@@ -64,11 +64,14 @@ Just add this tag in your base.html footer(your main template of django website)
 ```
 
 ### Migrate
-Migrate your app and restart your application server using python manage.py runserver command and check admin panel the model is ready to use
+Migrate your app Restart your app with this command
 ```python
--   Run `python manage.py migrate`
--   Run `python manage.py runserver` for Restart your application server
+python manage.py migrate
+
 ```
 
-
-
+### Restart 
+Restart your app server with this command and check the admin panel the model is ready to use
+```python
+python manage.py runserver
+```
