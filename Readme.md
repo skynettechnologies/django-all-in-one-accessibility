@@ -12,7 +12,7 @@ It uses the accessibility interface which handles UI and design related adjustme
 ---
 
 ## Installation
--   Run `pip install django-all-in-one-accessibility==1.0`
+-   Run `pip install django-all-in-one-accessibility==1.2`
 -   Add `accessibility` in `settings.INSTALLED_APPS`
 -   Add `accessibility.context_processors.admin_AIOA` in `settings.TEMPLATES context_processors`
 -   Add `<script id="aioa-adawidget" src="{{ AIOA_URL }}"></script>`put this line in your base.html footer
@@ -24,7 +24,7 @@ It uses the accessibility interface which handles UI and design related adjustme
 ## Usage
 
 ### Settings.INSTALLED_APPS
-Just add accessibility in to your setting.INSTALLED_APPS:
+Just add `accessibility` in to your setting.INSTALLED_APPS:
 
 ```python
 INSTALLED_APPS = [
@@ -39,7 +39,7 @@ INSTALLED_APPS = [
 ```
 
 ### Settings.TEMPLATES
-Just add 'accessibility.context_processors.admin_AIOA' in your setting.TEMPLATES:
+Just add `accessibility.context_processors.admin_AIOA` in your setting.TEMPLATES:
 ```python
 TEMPLATES = [
     {
@@ -56,7 +56,7 @@ TEMPLATES = [
 ```
 
 ### Base.html
-Just add this tag in your base.html footer(your main template of django website) '<script id="aioa-adawidget" src="{{ AIOA_URL }}"></script>':
+Just add this tag in your base.html footer(your main template of django website) `<script id="aioa-adawidget" src="{{ AIOA_URL }}"></script>`:
 ```python
   <footer>
     <script id="aioa-adawidget" src="{{ AIOA_URL }}"></script>
