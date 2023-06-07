@@ -71,7 +71,7 @@ python manage.py migrate
 ```
 
 ### Restart 
-Restart your app with this command
+Restart your app server with this command and check the admin panel the model is ready to use
 ```python
 python manage.py runserver
 ```
