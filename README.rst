@@ -9,7 +9,7 @@ Quick start
 
 - ``settings.py`` — add 'accessibility' in your INSTALLED_APPS
 
-- ``settings.TEMPLATES`` — put this line in TEMPLATES context_processors to `Accessibility.context_processors.admin_AIOA`
+- ``settings.TEMPLATES`` — put this line in TEMPLATES context_processors to `accessibility.context_processors.admin_AIOA`
 
 - ``base.html`` — put this line in footer of your base. html to `<script id="aioa-adawidget" src="{{ AIOA_URL }}"></script>`
 
