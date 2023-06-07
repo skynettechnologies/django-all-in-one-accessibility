@@ -15,7 +15,7 @@ It uses the accessibility interface which handles UI and design related adjustme
 -   Run `pip install django-all-in-one-accessibility==1.0`
 -   Add `accessibility` to `settings.INSTALLED_APPS`
 -   Add `accessibility.context_processors.admin_AIOA` to `settings.TEMPLATES context_processors`
--   Add `<script id="aioa-adawidget" src="{{ AIOA_URL }}"></script>` put this line in your base.html footer
+-   Add `<script id="aioa-adawidget" src="{{ AIOA_URL }}"></script>` to `put this line in your base.html footer`
 -   Run `python manage.py migrate`
 -   Run `python manage.py runserver` for Restart your application server
 
@@ -62,3 +62,13 @@ Just add this tag in your base.html footer(your main template of django website)
     <script id="aioa-adawidget" src="{{ AIOA_URL }}"></script>
   </footer>
 ```
+
+### Migrate
+Migrate your app and restart your application server using python manage.py runserver command and check admin panel the model is ready to use
+```python
+-   Run `python manage.py migrate`
+-   Run `python manage.py runserver` for Restart your application server
+```
+
+
+

@@ -63,7 +63,12 @@ Just add this tag in your base.html footer(your main template of django website)
   </footer>
 ```
 
-
+### Migrate
+Migrate your app and restart your application server using python manage.py runserver command and check admin panel the model is ready to use
+```python
+-   Run `python manage.py migrate`
+-   Run `python manage.py runserver` for Restart your application server
+```
 
 
 
