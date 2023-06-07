@@ -1,4 +1,4 @@
-#All in One Accessibility
+# All in One Accessibility
 - All in One Accessibility widget improves website ADA compliance and browser experience for WCAG 2.1, ATAG 2.0, ADA, Section 508, Australian DDA, European EAA EN 301 549, UK Equality Act (EA), Israeli Standard 5568, and California Unruh standards
 - 2 Minute installation
 - Screen Reader, dynamic widget color and position, supports multiple languages (36 languages)
