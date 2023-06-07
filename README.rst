@@ -7,31 +7,12 @@ Django All in One Accessibility
 Quick start
 ============
 
+- ``settings.py`` — add 'accessibility' in your INSTALLED_APPS
 
-edit your `settings.py`
+- ``settings.TEMPLATES`` — put this line in footer of your base. html to `<script id="aioa-adawidget" src="{{ AIOA_URL }}"></script>
 
-add to `INSTALLED_APPS`:
+- ``base.html`` — put this line in footer of your base. html to `<script id="aioa-adawidget" src="{{ AIOA_URL }}"></script>`
 
-```
-'accessibility',
-```
-
-
-Add accessibility.context_processors.admin_AIOA to `settings.TEMPLATES context_processors`:
-
-```
-'accessibility.context_processors.admin_AIOA',
-```
-
-
-
-
-put this line in footer of your base. html to `<script id="aioa-adawidget" src="{{ AIOA_URL }}"></script>`
-```
-<script id="aioa-adawidget" src="{{ AIOA_URL }}"></script>,
-```
-
-Run ``python manage.py migrate`` to create the  All in One Accessibility models. 
+Run ``python manage.py migrate`` to create the  All in One Accessibility models
 
 Start the development server and visit http://127.0.0.1:8000/admin/ to create a All in One Accessibility 
-
