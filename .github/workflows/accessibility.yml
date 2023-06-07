@@ -1,3 +1,7 @@
 name: django-all-in-one-accessibility
 on: [push]
-jobs: ""
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo Hello world!
