@@ -58,9 +58,11 @@ TEMPLATES = [
 ### Base.html
 Just add this tag in your base.html footer(your main template of django website) `<script id="aioa-adawidget" src="{{ AIOA_URL }}"></script>`:
 ```python
-  <footer>
+    {% block footer %}
+
     <script id="aioa-adawidget" src="{{ AIOA_URL }}"></script>
-  </footer>
+    
+    {% endblock %}
 ```
 
 ### Migrate
