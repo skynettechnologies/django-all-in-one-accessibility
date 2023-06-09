@@ -66,7 +66,7 @@ Just add this tag in your base.html footer(your main template of django website)
 ```
 
 ### Migrate
-Migrate your app Restart your app with this command
+Migrate your app
 ```python
 python manage.py migrate
 
