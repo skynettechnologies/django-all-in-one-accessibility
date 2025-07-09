@@ -1,4 +1,4 @@
-# All in One Accessibility®: 
+# All in One Accessibility®
 
 ## Enhance Your Website's Accessibility with All in One Accessibility®
 
@@ -130,21 +130,22 @@ For more details, visit **[All in One Accessibility®](https://www.skynettechnol
 
 English (USA), English (UK), English (Australian), English (Canadian), English (South Africa), Español, Español (Mexicano), Deutsch, عربى, Português, Português (Brazil), 日本語, Français, Italiano, Polski, Pусский, 中文, 中文 (Traditional), עִברִית, Magyar, Slovenčina, Suomenkieli, Türkçe, Ελληνικά, Latinus, Български, Català, Čeština, Dansk, Nederlands, हिंदी, Bahasa Indonesia, 한국인, Lietuvių, Bahasa Melayu, Norsk, Română, Slovenščina, Svenska, แบบไทย, Українська, Việt Nam, বাঙালি, සිංහල, አማርኛ, Hmoob, မြန်မာ, Eesti keel, latviešu, Cрпски, Hrvatski, ქართული, ʻŌlelo Hawaiʻi, Cymraeg, Cebuano, Samoa, Kreyòl ayisyen, Føroyskt, Crnogorski, Azerbaijani, Euskara, Tagalog, Galego, Norsk Bokmål, فارسی, ਪੰਜਾਬੀ, shqiptare, Hայերեն, অসমীয়া, Aymara, Bamanankan, беларускі, bosanski, Corsu, ދިވެހި, Esperanto, Eʋegbe, Frisian, guarani, ગુજરાતી, Hausa, íslenskur, Igbo, Gaeilge, basa jawa, ಕನ್ನಡ, қазақ, ខ្មែរ, Kinyarwanda, Kurdî, Кыргызча, ພາສາລາວ, Lingala, Luganda, lëtzebuergesch, македонски, Malagasy, മലയാളം, Malti, Maori, मराठी, Монгол, नेपाली, Sea, ଓଡିଆ, Afaan Oromoo, پښتو, Runasimi, संस्कृत, Gàidhlig na h-Alba, Sesotho, Shona, سنڌي, Soomaali, basa Sunda, kiswahili, тоҷикӣ, தமிழ், Татар, తెలుగు, ትግሪኛ, Tsonga, Türkmenler, Ride, اردو, ئۇيغۇر, o'zbek, isiXhosa, יידיש, Yoruba, Zulu, भोजपुरी, डोगरी, कोंकणी, Kurdî, Krio, मैथिली, Meiteilon, Mizo tawng, Sepedi, Ilocano, دری.
 
+
 #### You can use this package in Django/Django-CMS/Django-Oscar
 ---
 
 ## Installation
--   Run `pip install django-all-in-one-accessibility`
--   Add `accessibility` in `settings.INSTALLED_APPS`
--   Add `accessibility.context_processors.admin_AIOA` in `settings.TEMPLATES context_processors`
--   Add `<script id="aioa-adawidget" src="{{ AIOA_URL }}"></script>`put this line in your base.html footer
--   Run `python manage.py migrate`
--   Run `python manage.py runserver` for Restart your application server
+
+- Run `pip install django-all-in-one-accessibility`
+- Add `accessibility` in `settings.INSTALLED_APPS`
+- Add `accessibility.context_processors.admin_AIOA` in `settings.TEMPLATES context_processors`
+- Add `<script id="aioa-adawidget" src="{{ AIOA_URL }}"></script>`put this line in your base.html footer
+- Run `python manage.py migrate`
+- Run `python manage.py runserver` for Restart your application server
 
 ---
 
 ## Usage
-
 
 ## Steps for Django and Django CMS
 ---
@@ -282,9 +283,9 @@ To avoid CORS policy issues, ensure the following URLs are allowed in your websi
 To configure the widget, access the Admin Panel and head to the **All in One Accessibility** menu in the dashboard. From there, you can register **[here](https://ada.skynettechnologies.us/trial-subscription)** with 10 Days free trial.
 
 ## Documentation
-- [Purchase Django All in One Accessibility](https://www.skynettechnologies.com/django-website-accessibility)
-- [How to install All in One Accessibility Addon on Django](https://www.skynettechnologies.com/blog/django-cms-web-accessibility-widget-installation)
-- [All in One Accessibility - Features Guide](https://www.skynettechnologies.com/sites/default/files/accessibility-widget-features-list.pdf)
+- **[Purchase Django All in One Accessibility](https://www.skynettechnologies.com/django-website-accessibility)**
+- **[How to install All in One Accessibility Addon on Django](https://www.skynettechnologies.com/blog/django-cms-web-accessibility-widget-installation)**
+- **[All in One Accessibility - Features Guide](https://www.skynettechnologies.com/sites/default/files/accessibility-widget-features-list.pdf)**
 
 ## Submit a Support Request
 
@@ -340,17 +341,17 @@ For more details, Please visit **[Partnership Opportunities Page](https://www.sk
 
 ## Screenshots
 
-![App Screenshot](https://www.skynettechnologies.com/sites/default/files/screenshot-1-free.jpg?v=3)
+![App Screenshot](https://www.skynettechnologies.com/sites/default/files/screenshot-1-free.jpg?v=4)
 
-![App Screenshot](https://www.skynettechnologies.com/sites/default/files/screenshot-2-free.jpg?v=3)
+![App Screenshot](https://www.skynettechnologies.com/sites/default/files/screenshot-2-free.jpg?v=4)
 
-![App Screenshot](https://www.skynettechnologies.com/sites/default/files/screenshot-3-free.jpg?v=3)
+![App Screenshot](https://www.skynettechnologies.com/sites/default/files/screenshot-3-free.jpg?v=4)
 
-![App Screenshot](https://www.skynettechnologies.com/sites/default/files/screenshot-4-free.jpg?v=3)
+![App Screenshot](https://www.skynettechnologies.com/sites/default/files/screenshot-4-free.jpg?v=4)
 
 ## Video
 
-[![All in One Accessibility](https://img.youtube.com/vi/X70XtvGyvSs/0.jpg)](https://www.youtube.com/watch?v=X70XtvGyvSs)
+[![All in One Accessibility](https://img.youtube.com/vi/X70XtvGyvSs/0.jpg)](https://youtu.be/X70XtvGyvSs)
 
 ## Credits
 
