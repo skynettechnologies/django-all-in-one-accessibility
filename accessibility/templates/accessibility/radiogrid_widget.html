@@ -1,0 +1,143 @@
+{% comment %} <div class="row">
+  <div class="col-auto">
+    {% for name, tr in rows %}
+      <div class="form-item form-type-radio">
+        {% for value, name in values %}
+          {{ name }}
+          {% endfor %}
+        <div >
+          {{ name }}
+          {% if tr.template_name %}
+            {% include tr.template_name %}
+          {% else %}
+            {{ tr }}
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+ {% endcomment %}
+
+
+
+ <html>
+<div class="checkboxes">
+    <div class="icon-wrapper" >
+            {% for value, name in values %}
+              <div class="icon">{{ name }}</div>
+            {% endfor %}
+        </tr>
+      </div>
+    <div class="label-wrapper">
+        {% for name, tr in rows %}
+          {% comment %} <div class="name">
+              {{ name }}
+          </div> {% endcomment %}
+          {% if tr.template_name %}
+              {% include tr.template_name %}
+          {% else %}
+              {{ tr }}
+          {% endif %}
+        {% endfor %}
+      </div>
+
+</div>
+<style>
+  
+    .field-aioa_icon_type > div, .field-aioa_icon_size > div, .field-aioa_icon_mobile > div {
+      display: flex;
+    }
+    .checkboxes {
+      position: relative;
+    }
+    .checkboxes .icon-wrapper, 
+    .checkboxes .label-wrapper{
+      display: flex;
+      /*flex-wrap: wrap;*/
+      margin-left: -12px;
+      margin-right: -12px;
+    }
+    .checkboxes .icon-wrapper .icon, 
+    .checkboxes .label-wrapper label{
+      max-width: 100%;
+      padding-right: 12px;
+      padding-left: 12px;
+      flex: 0 0 auto;
+      width: auto;
+    }
+    .checkboxes .icon-wrapper .icon{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 130px;
+      height: 130px;
+      padding: 10px !important;
+      text-align: center;
+      background-color: #fff;
+      outline: 4px solid #fff;
+      outline-offset: -4px;
+      border-radius: 10px;
+      margin-left: 12px;
+      margin-right: 12px;
+      margin-bottom: 30px;
+    }
+    .checkboxes .label-wrapper{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+    .checkboxes .label-wrapper label{
+      width: 130px !important;
+      height: 130px !important;
+      padding: 10px !important;
+      border-radius: 10px;
+      margin-left: 12px;
+      margin-right: 12px;
+      margin-bottom: 30px;
+      position: relative;
+    }
+    .checkboxes .label-wrapper label input {
+      width: 100% !important;
+      height: 100% !important;
+      left: 0;
+      top: 0;
+      appearance: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .checkboxes .label-wrapper label input:checked {
+      box-shadow: 0 0 0 3px #8bcd55;
+    }
+    
+  </style> 
+
+
+
+{% comment %} <html>
+<table cellpadding="0" cellspacing="0" border="0" class="table table-striped radiogrid">
+    <thead >
+        <tr>
+            <th>&nbsp;</th>
+            {% for value, name in values %}
+                <th>{{ name }}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for name, tr in rows %}
+            <tr>
+                <td>
+                    {{ name }}
+                </td>
+                {% if tr.template_name %}
+                    {% include tr.template_name %}
+                {% else %}
+                    {{ tr }}
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table> 
+</html>  {% endcomment %}

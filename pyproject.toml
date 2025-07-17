@@ -1,15 +1,26 @@
 [project]
 name = "django-all-in-one-accessibility"
-version = "1.0"
+version = "2.0.1"
 authors = [
   { name="Skynet Technologies USA LLC", email="developer3@skynettechnologies.com" },
 ]
-description = "A Django App enhance the accessibility and usability of their website"
-readme = "README.rst"
-requires-python = ">=3.8"
+description = "All in One Accessibility widget improves Django website ADA compliance and browser experience for ADA, WCAG 2.1, Section 508, Australian DDA, European EAA EN 301 549, UK Equality Act (EA), Israeli Standard 5568, California Unruh, Ontario AODA, Canada ACA, German BITV, and France RGAA Standards"
+readme = "Readme.md"
 classifiers = [
     "Programming Language :: Python :: 3",
+    "Environment :: Web Environment",
+    "Framework :: Django",
+    "Framework :: Django :: 3.2  ",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: BSD License",
     "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
 ]
 
 [build-system]
