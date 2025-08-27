@@ -1,84 +1,162 @@
+# Create your models here.
+
 from django.db import models
 from django.core.exceptions import ValidationError
-from django.utils.html import format_html
-from .db import RadioGridField
-from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
+# Cleaned up and corrected choices
+AIOA_SELECT_CHOICES = [
+    ('top_left', 'Top Left'),
+    ('top_center', 'Top Center'),
+    ('top_right', 'Top Right'),
+    ('middle_left', 'Middle Left'),
+    ('middle_center', 'Middle Center'),
+    ('middle_right', 'Middle Right'),
+    ('bottom_left', 'Bottom Left'),
+    ('bottom_right', 'Bottom Right'),
+]
 
-aioa_SELECT_CHOICE = [('top_left','Top left'),
-      ('top_center','Top Center'),
-      ('top_right','Top Right'),
-      ('middel_left','Middle left'),
-      ('middel_right','Middle Right'),
-      ('bottom_left','Bottom left'),
-      ('bottom_center','Bottom Center'),
-      ('bottom_right','Bottom Right')]
+AIOA_SIZE_CHOICES = [
+    ('regular', 'Regular Size'),
+    ('oversize', 'Oversize'),
+]
 
-def validate_token(value):
-    if value is not None:
-        pass
-    else:
-        raise ValidationError("This field accepts mail id of google only")
+AIOA_ICON_TYPE_CHOICES = [
+    ('aioa-icon-type-1', ''),
+    ('aioa-icon-type-2', ''),
+    ('aioa-icon-type-3', ''),
+    ('aioa-icon-type-4', ''),
+    ('aioa-icon-type-5', ''),
+    ('aioa-icon-type-6', ''),
+    ('aioa-icon-type-7', ''),
+    ('aioa-icon-type-8', ''),
+    ('aioa-icon-type-9', ''),
+    ('aioa-icon-type-10', ''),
+    ('aioa-icon-type-11', ''),
+    ('aioa-icon-type-12', ''),
+    ('aioa-icon-type-13', ''),
+    ('aioa-icon-type-14', ''),
+    ('aioa-icon-type-15', ''),
+    ('aioa-icon-type-16', ''),
+    ('aioa-icon-type-17', ''),
+    ('aioa-icon-type-18', ''),
+    ('aioa-icon-type-19', ''),
+    ('aioa-icon-type-20', ''),
+    ('aioa-icon-type-21', ''),
+    ('aioa-icon-type-22', ''),
+    ('aioa-icon-type-23', ''),
+    ('aioa-icon-type-24', ''),
+    ('aioa-icon-type-25', ''),
+    ('aioa-icon-type-26', ''),
+    ('aioa-icon-type-27', ''),
+    ('aioa-icon-type-28', ''),
+    ('aioa-icon-type-29', ''),
+]
 
-ROWS = ((1 ,''),)
+to_the_right_choice = [('to_the_left','To the left'),
+      ('to_the_right','To the right'),
+    ]
 
-icon_change = '''    
-    <script>
-    const sizeOptions = document.querySelectorAll('input[name="aioa_icon_size_0"]');
-    console.log(sizeOptions)
-    const sizeOptionsImg = document.querySelectorAll('.csticontype');
-    const typeOptions = document.querySelectorAll('input[name="aioa_icon_type_0"]');
-    typeOptions.forEach(option => {
-        option.addEventListener("click", (event) => {
-            sizeOptionsImg.forEach(option2 => {
-                var ico_type = document.querySelector('input[name="aioa_icon_type_0"]:checked').value;
-                option2.setAttribute("src", "https://skynettechnologies.com/sites/default/files/python/" + ico_type + ".svg");
-            });
-        });
-    });
-</script>
+to_the_bottom_choice = [('to_the_bottom','Top the bottom'),
+      ('to_the_top','To the top'),
+    ]
 
-<script>
-      if(document.querySelector("#id_aioa_license_Key").value != '')
-      {
-          document.querySelector('div[class="form-row field-aioa_icon_type"]').style.display='block';
-          document.querySelector('div[class="form-row field-aioa_icon_size"]').style.display='block';
-          document.querySelector('div[class="form-row field-aioa_color_code"]').style.display='block';
-          document.querySelector('div[class="form-row field-aioa_place"]').style.display='block';
-      }
-      else
-      {
-          document.querySelector('div[class="form-row field-aioa_icon_type"]').style.display='none';
-          document.querySelector('div[class="form-row field-aioa_icon_size"]').style.display='none';
-          document.querySelector('div[class="form-row field-aioa_color_code"]').style.display='none';
-          document.querySelector('div[class="form-row field-aioa_place"]').style.display='none';
-      }
-      </script>  
-'''
-
-value_i = 'aioa-icon-type-1.svg'
-
-CHOICES = [('aioa-icon-type-1', format_html('<img  src="https://skynettechnologies.com/sites/default/files/python/aioa-icon-type-1.svg" width="65" height="65" />')), ('aioa-icon-type-2', format_html('<img  src="https://skynettechnologies.com/sites/default/files/python/aioa-icon-type-2.svg" width="65" height="65" />')), ('aioa-icon-type-3', format_html('<img  src="https://skynettechnologies.com/sites/default/files/python/aioa-icon-type-3.svg" width="65" height="65" />'))]
-
-CHOICES1 = [('aioa-big-icon', format_html('<img class="csticontype"  src="https://skynettechnologies.com/sites/default/files/python/{}" width="75" height="75" />',value_i)), ('aioa-medium-icon', format_html('<img class="csticontype"src="https://skynettechnologies.com/sites/default/files/python/{}" width="65" height="65" />',value_i)), ('aioa-default-icon', format_html('<img class="csticontype" src="https://skynettechnologies.com/sites/default/files/python/{}" width="55" height="55" />',value_i)), ('aioa-small-icon', format_html('<img class="csticontype" src="https://skynettechnologies.com/sites/default/files/python/{}" width="45" height="45" />',value_i)), ('aioa-extra-small-icon',format_html('<img class="csticontype" src="https://skynettechnologies.com/sites/default/files/python/{}" width="35" height="35"/>',value_i))]
+AIOA_ICON_SIZE_CHOICES = [
+    ('aioa-big-icon', ''),
+    ('aioa-medium-icon', ''),
+    ('aioa-default-icon', ''),
+    ('aioa-small-icon', ''),
+    ('aioa-extra-small-icon', ''),
+]
 
 
-class all_in_one_accessibility(models.Model):
-    aioa_license_Key = models.CharField(max_length=150,blank=True,validators=[validate_token],default=None,verbose_name='License Key')
+class AllInOneAccessibility(models.Model):
+   
+    aioa_color_code = models.CharField(
+        max_length=50,
+        blank=True,
+        default='',
+        verbose_name='Hex Color Code',
+        help_text='You can customize the ADA Widget color. For example: #FF5733'
+    )
+
+    enable_widget_icon_position = models.BooleanField(
+        default=False,
+        verbose_name="Enable Precise accessibility widget icon position"
+    )
+
+    to_the_right_px = models.PositiveSmallIntegerField(
+        default=20,
+        validators=[MinValueValidator(0), MaxValueValidator(250)],
+        verbose_name="Right offset (PX)",
+        help_text="0 - 250px are permitted values"
+    )
+
+    to_the_right = models.CharField(
+        default='to_the_left',choices=to_the_right_choice,
+        verbose_name="To the left"
+    )
+
+    to_the_bottom_px = models.PositiveSmallIntegerField(
+        default=20,
+        validators=[MinValueValidator(0), MaxValueValidator(250)],
+        verbose_name="Bottom offset (PX)",
+        help_text="0 - 250px are permitted values"
+    )
+
+    to_the_bottom = models.CharField(
+        default='to_the_bottom',choices=to_the_bottom_choice,
+        verbose_name="To the bottom"
+    )
     
-    aioa_color_code = models.CharField(max_length=50,blank=True,default=' ',verbose_name ='Hex color code',help_text='You can cutomize the ADA Widget color. For example: #FF5733')
-    
-    aioa_place = models.CharField(max_length=100,blank=True,choices=aioa_SELECT_CHOICE,default=('bottom_right','Bottom Right'),verbose_name='Where would you like to place the accessibility icon on your site')
-    
-    aioa_icon_type = RadioGridField(rows=ROWS, values=CHOICES,require_all_fields = False,default=('aioa-icon-type-1',format_html('<img  src="https://skynettechnologies.com/sites/default/files/python/aioa-icon-type-1.svg" width="65" height="65" />')),verbose_name='Icon Type')
-    
-    aioa_icon_size = RadioGridField(rows=ROWS,values=CHOICES1,require_all_fields = False,default=('aioa-default-icon', format_html('<img class="csticontype" src="https://skynettechnologies.com/sites/default/files/python/{}" width="55" height="55" />',value_i)), verbose_name='Icon Size',help_text=icon_change)
-    
-    # aioa_icon_mobile = RadioGridField(rows=ROWS, values=CHOICES1,default=('aioa-default-icon', format_html('<img class="csticontype" src="https://skynettechnologies.com/sites/default/files/python/{}" width="55" height="55" />',value_i)), require_all_fields=True,verbose_name='Icon Size For Mobile',help_text=icon_change)
+    aioa_place = models.CharField(
+        max_length=100,
+        choices=AIOA_SELECT_CHOICES,
+        default='bottom_right',
+        verbose_name='Where would you like to place the accessibility icon on your site'
+    )
 
+    aioa_size = models.CharField(
+        max_length=20,
+        choices=AIOA_SIZE_CHOICES,
+        default='oversize',
+        verbose_name='Select Widget Size'
+    )
+    
+    aioa_icon_type = models.CharField(
+        max_length=50,
+        choices=AIOA_ICON_TYPE_CHOICES,
+        default='aioa-icon-type-1',
+        verbose_name='Icon Type'
+    )
+
+    enable_icon_custom_size = models.BooleanField(
+        default=False,
+        verbose_name="Enable Icon Custom Size"
+    )
+
+    aioa_size_value = models.PositiveSmallIntegerField(
+        default=50,
+        validators=[MinValueValidator(20), MaxValueValidator(150)],
+        verbose_name="Select exact icon size (PX)",
+        help_text="20 - 150px are permitted values"
+    )
+
+    
+    aioa_icon_size = models.CharField(
+        max_length=50,
+        choices=AIOA_ICON_SIZE_CHOICES,
+        default='aioa-default-icon',
+        verbose_name='Icon Size',
+        help_text='This size preview will change according to the selected icon type.'
+    )
+        
     def __str__(self):
-        return '{}'.format("All in One Accessibility Settings")
+        return 'All in One Accessibility Settings'
 
     class Meta:
         verbose_name = 'All in One Accessibility Settings'
-        verbose_name_plural = 'All in One Accessibility Settings'   
+        verbose_name_plural = 'All in One Accessibility Settings'
+       
+ 
+
 

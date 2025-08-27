@@ -1,0 +1,92 @@
+{% extends "admin/change_form.html" %}
+{% load static %}
+
+{% block extrahead %}
+{{ block.super }}
+
+{% block extrastyle %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static 'form-icons.css' %}">
+{% endblock %}
+<script src="{% static 'icon-radio.js' %}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const enablePosition = document.querySelector('#id_enable_widget_icon_position');
+    const enableCustomSize = document.querySelector('#id_enable_icon_custom_size');
+    const iconTypeRadios = document.querySelectorAll('input[name="aioa_icon_type"]');
+    const iconSizeImages = document.querySelectorAll('.csticontype');
+
+    const toggleGroups = {
+        positionFields: [
+            '.form-row.field-to_the_right',
+            '.form-row.field-to_the_bottom',
+            '.form-row.field-to_the_right_px',
+            '.form-row.field-to_the_bottom_px',
+            '.form-row.field-aioa_place'
+        ],
+        customSizeFields: [
+            '.form-row.field-aioa_size_value',
+            '.form-row.field-aioa_icon_size' // Hide/show this along with aioa_size_value
+        ]
+    };
+
+    function togglePositionFields() {
+        const show = enablePosition && enablePosition.checked;
+        toggleGroups.positionFields.forEach(selector => {
+            const el = document.querySelector(selector);
+            if (el) {
+                // aioa_place shows when position is *not* enabled
+                if (selector === '.form-row.field-aioa_place') {
+                    el.style.display = show ? 'none' : '';
+                } else {
+                    el.style.display = show ? '' : 'none';
+                }
+            }
+        });
+    }
+
+    function toggleCustomSizeFields() {
+        const show = enableCustomSize && enableCustomSize.checked;
+        toggleGroups.customSizeFields.forEach(selector => {
+            const el = document.querySelector(selector);
+            if (el) {
+                const isSizeValue = selector === '.form-row.field-aioa_size_value';
+                el.style.display = show === isSizeValue ? '' : 'none';
+            }
+        });
+    }
+
+    function updateIconPreviews(newIconType) {
+        iconSizeImages.forEach(img => {
+            const size = img.getAttribute('width');
+            img.src = `https://www.skynettechnologies.com/sites/default/files/${newIconType}.svg`;
+            img.width = size;
+            img.height = size;
+        });
+    }
+
+    // Run initial logic
+    togglePositionFields();
+    toggleCustomSizeFields();
+
+    const selectedIconType = document.querySelector('input[name="aioa_icon_type"]:checked');
+    if (selectedIconType) {
+        updateIconPreviews(selectedIconType.value);
+    }
+
+    // Event listeners
+    if (enablePosition) {
+        enablePosition.addEventListener('change', togglePositionFields);
+    }
+    if (enableCustomSize) {
+        enableCustomSize.addEventListener('change', toggleCustomSizeFields);
+    }
+
+    iconTypeRadios.forEach(radio => {
+        radio.addEventListener('change', function () {
+            updateIconPreviews(this.value);
+        });
+    });
+});
+</script>
+{% endblock %}

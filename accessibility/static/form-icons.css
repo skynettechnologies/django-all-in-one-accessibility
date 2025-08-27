@@ -1,0 +1,22 @@
+#id_aioa_icon_type,
+#id_aioa_icon_size {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 40px;
+}
+
+#id_aioa_icon_type div label,
+#id_aioa_icon_size div label {
+  display: flex;
+  align-items: flex-start;
+  min-width: 120px;
+  height: 130px;
+  width: 130px;
+  text-align: center;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
