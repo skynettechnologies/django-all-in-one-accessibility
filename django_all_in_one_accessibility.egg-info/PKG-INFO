@@ -1,32 +1,49 @@
 Metadata-Version: 2.4
 Name: django-all-in-one-accessibility
-Version: 3.0.0
-Summary: All in One Accessibility widget improves Django website ADA compliance and browser experience for ADA, WCAG 2.1, Section 508, Australian DDA, European EAA EN 301 549, UK Equality Act (EA), Israeli Standard 5568, California Unruh, Ontario AODA, Canada ACA, German BITV, and France RGAA Standards
+Version: 3.0.1
+Summary: Website accessibility widget for improving WCAG 2.0, 2.1, 2.2 and ADA compliance!
+Home-page: https://www.skynettechnologies.com
 Author: Skynet Technologies USA LLC
-Author-email: Skynet Technologies USA LLC <developer3@skynettechnologies.com>
-Classifier: Programming Language :: Python :: 3
+Author-email: developer3@skynettechnologies.com
 Classifier: Environment :: Web Environment
 Classifier: Framework :: Django
-Classifier: Framework :: Django :: 5.2
-Classifier: Framework :: Django :: 5.1
-Classifier: Framework :: Django :: 5.0
-Classifier: Framework :: Django :: 4.2
+Classifier: Framework :: Django :: 4.0
 Classifier: Framework :: Django :: 4.1
+Classifier: Framework :: Django :: 4.2
+Classifier: Framework :: Django :: 5.0
+Classifier: Framework :: Django :: 5.1
+Classifier: Framework :: Django :: 5.2
 Classifier: Intended Audience :: Developers
 Classifier: License :: OSI Approved :: BSD License
 Classifier: Operating System :: OS Independent
-Classifier: Programming Language :: Python
-Classifier: Programming Language :: Python :: 3
-Classifier: Programming Language :: Python :: 3 :: Only
-Classifier: Programming Language :: Python :: 3.13
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
 Classifier: Topic :: Internet :: WWW/HTTP
 Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
 Description-Content-Type: text/markdown
-License-File: LICENSE.txt
-Requires-Dist: Django<5.3,>=4.1
-Requires-Dist: requests>=2.25.0
-Dynamic: author
-Dynamic: license-file
+Requires-Dist: Django<5.3,>=4.0
+Requires-Dist: requests
+Dynamic: description-content-type
+
+## Compatibility
+### Version Support
+
+![Python](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12-blue)
+![Django](https://img.shields.io/badge/django-4.0%20%7C%204.1%20%7C%204.2%20%7C%205.0%20%7C%205.1%20%7C%205.2-blue)
+![Django CMS](https://img.shields.io/badge/django--cms-4.1.x%20%7C%205.0.0-blue)
+![Django Oscar](https://img.shields.io/badge/django--oscar-3.2.x%20%7C%204.0-blue)
+
+---
+
+### Compatibility Table
+
+If badges above do not display correctly, please refer to the table below:
+
+| **Python Versions**       | **Django Versions**                  | **Django CMS**           | **Django Oscar**       |
+|---------------------------|--------------------------------------|--------------------------|------------------------|
+| 3.10, 3.11, 3.12          | 4.0, 4.1, 4.2, 5.0, 5.1, 5.2         | 4.1.x (LTS), 5.0.0       | 3.2.x, 4.0             |
+
 
 # All in One Accessibility®
 
@@ -313,8 +330,6 @@ To avoid CORS policy issues, ensure the following URLs are allowed in your websi
 To configure the widget, access the Admin Panel and head to the **All in One Accessibility** menu in the dashboard. From there, you can register **[here](https://ada.skynettechnologies.us/trial-subscription)** with 10 Days free trial.
 
 ## Documentation
-- **[Purchase Django All in One Accessibility](https://www.skynettechnologies.com/django-website-accessibility)**
-- **[How to install All in One Accessibility Addon on Django](https://www.skynettechnologies.com/blog/django-cms-web-accessibility-widget-installation)**
 - **[All in One Accessibility - Features Guide](https://www.skynettechnologies.com/sites/default/files/accessibility-widget-features-list.pdf)**
 
 ## Submit a Support Request

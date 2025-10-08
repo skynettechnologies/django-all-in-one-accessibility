@@ -1,3 +1,22 @@
+## Compatibility
+### Version Support
+
+![Python](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12-blue)
+![Django](https://img.shields.io/badge/django-4.0%20%7C%204.1%20%7C%204.2%20%7C%205.0%20%7C%205.1%20%7C%205.2-blue)
+![Django CMS](https://img.shields.io/badge/django--cms-4.1.x%20%7C%205.0.0-blue)
+![Django Oscar](https://img.shields.io/badge/django--oscar-3.2.x%20%7C%204.0-blue)
+
+---
+
+### Compatibility Table
+
+If badges above do not display correctly, please refer to the table below:
+
+| **Python Versions**       | **Django Versions**                  | **Django CMS**           | **Django Oscar**       |
+|---------------------------|--------------------------------------|--------------------------|------------------------|
+| 3.10, 3.11, 3.12          | 4.0, 4.1, 4.2, 5.0, 5.1, 5.2         | 4.1.x (LTS), 5.0.0       | 3.2.x, 4.0             |
+
+
 # All in One Accessibility®
 
 ## Enhance Your Website's Accessibility with All in One Accessibility®
@@ -15,7 +34,6 @@ This lightweight and flexible widget is designed to improve your website’s com
 - **PDF/UA – ISO 14289** (Accessible PDF Format)
 
 ### **United States**
-
 - **ADA (Americans with Disabilities Act)**  
 - **ADA Title III Website Accessibility**  
 - **Section 508 (U.S. Government Standard)**  
@@ -37,90 +55,69 @@ This lightweight and flexible widget is designed to improve your website’s com
 - **Washington State ADA Compliance**
 
 ### **Canada**
-
 - **AODA (Accessibility for Ontarians with Disabilities Act)**  
 - **ACA (Accessible Canada Act)**
 
 ### **United Kingdom**
-
 - **UK Equality Act (EA)**
 
 ### **European Union**
-
 - **EAA / EN 301 549 Accessibility**  
 - **EN 301 549 v4.1.1**
 
 ### **France**
-
 - **RGAA (Référentiel Général d’Amélioration de l’Accessibilité)**
 
 ### **Germany**
-
 - **BITV (Barrierefreie-Informationstechnik-Verordnung)**
 
 ### **Italy**
-
 - **Italian Stanca Act**
 
 ### **Spain**
-
 - **UNE 139803:2012**
 
 ### **Austria**
-
 - **WZG (Austrian Web Accessibility Act)**
 
 ### **Switzerland**
-
 - **Swiss Disability Discrimination Act (DDA)**
 
 ### **Sweden**
-
 - **Swedish Discrimination Act (2008:567)**
 
 ### **Israel**
-
 - **IS 5568 (Israeli Standard)**
 
 ### **Australia**
-
 - **Australian DDA (Disability Discrimination Act)**
 
 ### **India**
-
 - **RPD Act (Rights of Persons with Disabilities Act)**  
 - **GIGW 3.0 (Guidelines for Indian Government Websites)**
 
 ### **Brazil**
-
 - **LBI 13.146/2015 (Brazilian Inclusion Law)**
 
 ### **Mexico**
-
 - **ADA-Inspired Web Accessibility Compliance**
 
 ### **Japan**
-
 - **JIS X 8341**
 
 ### **South Korea**
-
 - **KWCAG 2.1 (Korean Web Content Accessibility Guidelines)**
 
 ### **Singapore**
-
 - **DSS and SGDS (Design System and Digital Standards)**
 
 ### **Malaysia**
-
 - **PWD Act 2008 (Persons with Disabilities Act)**
 
 ### **Thailand**
-
 - **PDA 2013 (Persons with Disabilities Empowerment Act)**
 
 ### **United Arab Emirates**
-
 - **UAE Disability Act (Federal Law No. 29 of 2006)**
 
 For more details on supported accessibility laws and standards, visit  
@@ -152,8 +149,8 @@ For more details, visit **[All in One Accessibility®](https://www.skynettechnol
 
 English (USA), English (UK), English (Australian), English (Canadian), English (South Africa), Español, Español (Mexicano), Deutsch, عربى, Português, Português (Brazil), 日本語, Français, Italiano, Polski, Pусский, 中文, 中文 (Traditional), עִברִית, Magyar, Slovenčina, Suomenkieli, Türkçe, Ελληνικά, Latinus, Български, Català, Čeština, Dansk, Nederlands, हिंदी, Bahasa Indonesia, 한국인, Lietuvių, Bahasa Melayu, Norsk, Română, Slovenščina, Svenska, แบบไทย, Українська, Việt Nam, বাঙালি, සිංහල, አማርኛ, Hmoob, မြန်မာ, Eesti keel, latviešu, Cрпски, Hrvatski, ქართული, ʻŌlelo Hawaiʻi, Cymraeg, Cebuano, Samoa, Kreyòl ayisyen, Føroyskt, Crnogorski, Azerbaijani, Euskara, Tagalog, Galego, Norsk Bokmål, فارسی, ਪੰਜਾਬੀ, shqiptare, Hայերեն, অসমীয়া, Aymara, Bamanankan, беларускі, bosanski, Corsu, ދިވެހި, Esperanto, Eʋegbe, Frisian, guarani, ગુજરાતી, Hausa, íslenskur, Igbo, Gaeilge, basa jawa, ಕನ್ನಡ, қазақ, ខ្មែរ, Kinyarwanda, Kurdî, Кыргызча, ພາສາລາວ, Lingala, Luganda, lëtzebuergesch, македонски, Malagasy, മലയാളം, Malti, Maori, मराठी, Монгол, नेपाली, Sea, ଓଡିଆ, Afaan Oromoo, پښتو, Runasimi, संस्कृत, Gàidhlig na h-Alba, Sesotho, Shona, سنڌي, Soomaali, basa Sunda, kiswahili, тоҷикӣ, தமிழ், Татар, తెలుగు, ትግሪኛ, Tsonga, Türkmenler, Ride, اردو, ئۇيغۇر, o'zbek, isiXhosa, יידיש, Yoruba, Zulu, भोजपुरी, डोगरी, कोंकणी, Kurdî, Krio, मैथिली, Meiteilon, Mizo tawng, Sepedi, Ilocano, دری.
 
-#### You can use this package in Django/Django-CMS/Django-Oscar
 
+#### You can use this package in Django/Django-CMS/Django-Oscar
 ---
 
 ## Installation
@@ -170,11 +167,9 @@ English (USA), English (UK), English (Australian), English (Canadian), English (
 ## Usage
 
 ## Steps for Django and Django CMS
-
 ---
 
 ### Settings.INSTALLED_APPS
-
 Just add `accessibility` in to your setting.INSTALLED_APPS:
 
 ```python
@@ -190,9 +185,7 @@ INSTALLED_APPS = [
 ```
 
 ### Settings.TEMPLATES
-
 Just add `accessibility.context_processors.admin_AIOA` in your setting.TEMPLATES:
-
 ```python
 TEMPLATES = [
     {
@@ -209,9 +202,7 @@ TEMPLATES = [
 ```
 
 ### Base.html
-
 Just add this tag in your base.html footer(your main template of django website) `<script id="aioa-adawidget" src="{{ AIOA_URL }}"></script>`:
-
 ```python
   <footer>
     <script id="aioa-adawidget" src="{{ AIOA_URL }}"></script>
@@ -219,29 +210,21 @@ Just add this tag in your base.html footer(your main template of django website)
 ```
 
 ### Migrate
-
-Migrate your app:
-
+Migrate your app
 ```python
 python manage.py migrate
 
 ```
 
 ### Restart
-
 Restart your app server with this command and check the admin panel the model is ready to use
-
 ```python
 python manage.py runserver
 ```
-
 ---
-
 ## Steps for Django Oscar
-
 ---
 ### Settings.INSTALLED_APPS
-
 Just add `accessibility` in to your setting.INSTALLED_APPS:
 
 ```python
@@ -257,9 +240,7 @@ INSTALLED_APPS = [
 ```
 
 ### Settings.TEMPLATES
-
 Just add `accessibility.context_processors.admin_AIOA` in your setting.TEMPLATES:
-
 ```python
 TEMPLATES = [
     {
@@ -276,28 +257,22 @@ TEMPLATES = [
 ```
 
 ### Base.html
-
 There is some changes in base.html file for Oscar project `when u are using django oscar there is already base.html file exists so u need to go to oscar project directory which are locate in your site-packages(go to site-packages -> oscar -> templates ->oscar -> base.html) put this tag <script id="aioa-adawidget" src="{{ AIOA_URL }}"></script> in oscar/templates/oscar/base.html footer`
-
 ```python
 <footer>
-    <script id="aioa-adawidget" src="{{ AIOA_URL }}"></script>
+	<script id="aioa-adawidget" src="{{ AIOA_URL }}"></script>
 </footer>
 ```
 
 ### Migrate
-
-Migrate your app:
-
+Migrate your app
 ```python
 python manage.py migrate
 
 ```
 
 ### Restart
-
 Restart your app server with this command and check the admin panel the model is ready to use
-
 ```python
 python manage.py runserver
 ```
@@ -314,6 +289,7 @@ To avoid CORS policy issues, ensure the following URLs are allowed in your websi
 | `https://*.gstatic.com`            | Fonts APIs                                   | Custom Fonts                     |
 | `https://vlibras.gov.br`           | VLibras - Brazilian Sign Language Service    | Sign Language                    |
 
+
 ## Instructions
 
 1. Update your server's CORS configuration to include these URLs.
@@ -326,9 +302,6 @@ To avoid CORS policy issues, ensure the following URLs are allowed in your websi
 To configure the widget, access the Admin Panel and head to the **All in One Accessibility** menu in the dashboard. From there, you can register **[here](https://ada.skynettechnologies.us/trial-subscription)** with 10 Days free trial.
 
 ## Documentation
-
-- **[Purchase Django All in One Accessibility](https://www.skynettechnologies.com/django-website-accessibility)**
-- **[How to install All in One Accessibility Addon on Django](https://www.skynettechnologies.com/blog/django-cms-web-accessibility-widget-installation)**
 - **[All in One Accessibility - Features Guide](https://www.skynettechnologies.com/sites/default/files/accessibility-widget-features-list.pdf)**
 
 ## Submit a Support Request
@@ -352,29 +325,23 @@ Simple before-after UI/UX recommendations on how to fix the issues.
 Comprehensive audit report.
 
 ### **[Manual Accessibility Remediation](https://www.skynettechnologies.com/all-in-one-accessibility/addons#manual-accessibility-remediation)**
-
 Enhance website accessibility and inclusivity with our Manual Accessibility Remediation add-on. This service includes fixing accessibility issues and thorough remediation of your website manually. Our experts ensure accessibility with WCAG standards, improve user experience for those with disabilities, and provide a detailed report on the improvements made.
 
 ### **[PDF/Document Accessibility Remediation](https://www.skynettechnologies.com/all-in-one-accessibility/addons#pdf-document-remediation)**
-
 The PDF / Document Remediation provides a list of inaccessible PDFs and remediated PDFs from where you can request PDF remediation service.
-
+ 
 ### **[VPAT Report/Accessibility Conformance Report(ACR)](https://www.skynettechnologies.com/all-in-one-accessibility/addons#vpat-acr-report)**
-
 The Voluntary Product Accessibility Template (VPAT), also known as an ACR (Accessibility Conformance Report) starts with an audit and provides current details for an accessible website, application, or any other digital assets.
 
 ## Accessibility Widget Paid Add-ons
 
 ### **[White Label](https://www.skynettechnologies.com/all-in-one-accessibility/addons#accessibility-widget-add-ons)**
-
 Remove the Skynet technologies logo as well as all of the footer links, popups, report a problem link and more for full white label control.
 
 ### **[Live Site Translations](https://www.skynettechnologies.com/all-in-one-accessibility/addons#accessibility-widget-add-ons)**
-
 Translate your site into over 140 languages instantly to enhance accessibility for non-native speakers, individuals with language acquisition difficulties, and those with learning disabilities.
 
-### **[Modify Accessibility Menu](https://www.skynettechnologies.com/all-in-one-accessibility/addons#accessibility-widget-add-ons)**
-
+###  **[Modify Accessibility Menu](https://www.skynettechnologies.com/all-in-one-accessibility/addons#accessibility-widget-add-ons)**
 Build and fine-tune your widget with the Modify Menu option. Reorder, remove and restructure the widget buttons to fit your users’ specific accessibility needs.
 
 ## Accessibility Partnership Opportunities

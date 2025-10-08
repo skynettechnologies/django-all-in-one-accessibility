@@ -1,9 +1,8 @@
 # Create your models here.
 
 from django.db import models
-from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
-# Cleaned up and corrected choices
+
 AIOA_SELECT_CHOICES = [
     ('top_left', 'Top Left'),
     ('top_center', 'Top Center'),
@@ -20,68 +19,42 @@ AIOA_SIZE_CHOICES = [
     ('oversize', 'Oversize'),
 ]
 
-AIOA_ICON_TYPE_CHOICES = [
-    ('aioa-icon-type-1', ''),
-    ('aioa-icon-type-2', ''),
-    ('aioa-icon-type-3', ''),
-    ('aioa-icon-type-4', ''),
-    ('aioa-icon-type-5', ''),
-    ('aioa-icon-type-6', ''),
-    ('aioa-icon-type-7', ''),
-    ('aioa-icon-type-8', ''),
-    ('aioa-icon-type-9', ''),
-    ('aioa-icon-type-10', ''),
-    ('aioa-icon-type-11', ''),
-    ('aioa-icon-type-12', ''),
-    ('aioa-icon-type-13', ''),
-    ('aioa-icon-type-14', ''),
-    ('aioa-icon-type-15', ''),
-    ('aioa-icon-type-16', ''),
-    ('aioa-icon-type-17', ''),
-    ('aioa-icon-type-18', ''),
-    ('aioa-icon-type-19', ''),
-    ('aioa-icon-type-20', ''),
-    ('aioa-icon-type-21', ''),
-    ('aioa-icon-type-22', ''),
-    ('aioa-icon-type-23', ''),
-    ('aioa-icon-type-24', ''),
-    ('aioa-icon-type-25', ''),
-    ('aioa-icon-type-26', ''),
-    ('aioa-icon-type-27', ''),
-    ('aioa-icon-type-28', ''),
-    ('aioa-icon-type-29', ''),
+TO_THE_RIGHT_CHOICES = [
+    ('to_the_left', 'To the left'),
+    ('to_the_right', 'To the right'),
 ]
 
-to_the_right_choice = [('to_the_left','To the left'),
-      ('to_the_right','To the right'),
-    ]
-
-to_the_bottom_choice = [('to_the_bottom','Top the bottom'),
-      ('to_the_top','To the top'),
-    ]
+TO_THE_BOTTOM_CHOICES = [
+    ('to_the_bottom', 'To the bottom'),
+    ('to_the_top', 'To the top'),
+]
 
 AIOA_ICON_SIZE_CHOICES = [
-    ('aioa-big-icon', ''),
-    ('aioa-medium-icon', ''),
-    ('aioa-default-icon', ''),
-    ('aioa-small-icon', ''),
-    ('aioa-extra-small-icon', ''),
+    ('aioa-big-icon', 'Big'),
+    ('aioa-medium-icon', 'Medium'),
+    ('aioa-default-icon', 'Default'),
+    ('aioa-small-icon', 'Small'),
+    ('aioa-extra-small-icon', 'Extra Small'),
 ]
 
+ICON_CHOICES = [
+    (f'aioa-icon-type-{i}', f'https://www.skynettechnologies.com/sites/default/files/aioa-icon-type-{i}.svg')
+    for i in range(1, 30)
+]
 
+  
 class AllInOneAccessibility(models.Model):
-   
     aioa_color_code = models.CharField(
         max_length=50,
         blank=True,
         default='',
         verbose_name='Hex Color Code',
-        help_text='You can customize the ADA Widget color. For example: #FF5733'
+        help_text='Customize the ADA Widget color. Example: #FF5733'
     )
 
     enable_widget_icon_position = models.BooleanField(
         default=False,
-        verbose_name="Enable Precise accessibility widget icon position"
+        verbose_name="Enable Precise widget icon positioning"
     )
 
     to_the_right_px = models.PositiveSmallIntegerField(
@@ -92,8 +65,10 @@ class AllInOneAccessibility(models.Model):
     )
 
     to_the_right = models.CharField(
-        default='to_the_left',choices=to_the_right_choice,
-        verbose_name="To the left"
+        max_length=50,
+        default='to_the_left',
+        choices=TO_THE_RIGHT_CHOICES,
+        verbose_name="To the right"
     )
 
     to_the_bottom_px = models.PositiveSmallIntegerField(
@@ -104,34 +79,36 @@ class AllInOneAccessibility(models.Model):
     )
 
     to_the_bottom = models.CharField(
-        default='to_the_bottom',choices=to_the_bottom_choice,
+        max_length=50,
+        default='to_the_bottom',
+        choices=TO_THE_BOTTOM_CHOICES,
         verbose_name="To the bottom"
     )
-    
+
     aioa_place = models.CharField(
         max_length=100,
         choices=AIOA_SELECT_CHOICES,
         default='bottom_right',
-        verbose_name='Where would you like to place the accessibility icon on your site'
+        verbose_name='Position of the accessibility icon'
     )
 
     aioa_size = models.CharField(
         max_length=20,
         choices=AIOA_SIZE_CHOICES,
         default='oversize',
-        verbose_name='Select Widget Size'
+        verbose_name='Widget Size'
     )
-    
+
     aioa_icon_type = models.CharField(
         max_length=50,
-        choices=AIOA_ICON_TYPE_CHOICES,
+        choices=ICON_CHOICES,
         default='aioa-icon-type-1',
         verbose_name='Icon Type'
     )
 
     enable_icon_custom_size = models.BooleanField(
         default=False,
-        verbose_name="Enable Icon Custom Size"
+        verbose_name="Enable Custom Icon Size"
     )
 
     aioa_size_value = models.PositiveSmallIntegerField(
@@ -141,22 +118,17 @@ class AllInOneAccessibility(models.Model):
         help_text="20 - 150px are permitted values"
     )
 
-    
     aioa_icon_size = models.CharField(
         max_length=50,
         choices=AIOA_ICON_SIZE_CHOICES,
         default='aioa-default-icon',
-        verbose_name='Icon Size',
-        help_text='This size preview will change according to the selected icon type.'
+        verbose_name='Desktop Icon Size',
     )
-        
+    
     def __str__(self):
-        return 'All in One Accessibility Settings'
-
+        return "All In One Accessibility"
+    
     class Meta:
-        verbose_name = 'All in One Accessibility Settings'
-        verbose_name_plural = 'All in One Accessibility Settings'
-       
- 
-
+        verbose_name = "All In One Accessibility"
+        verbose_name_plural = "All In One Accessibility"
 

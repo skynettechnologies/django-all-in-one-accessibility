@@ -1,2 +1,2 @@
-Django<5.3,>=4.1
-requests>=2.25.0
+Django<5.3,>=4.0
+requests
