@@ -1,253 +1,111 @@
-from django.contrib import admin
-
 # Register your models here.
-from django import forms
+from django.contrib import admin 
 from .models import AllInOneAccessibility
-from django.utils.safestring import mark_safe
-import requests
-import json
+from django import forms
+from .models import AllInOneAccessibility, ICON_CHOICES, AIOA_ICON_SIZE_CHOICES
+from .forms import IconSelectWidget, IconSizeSelectWidget
 from urllib.parse import urlparse
+import requests
+from django.shortcuts import redirect
+from django.urls import reverse
+import threading
+import base64
+import os
+import json
+from datetime import datetime
 
-
-    
-# Map each choice key to its image URL
-ICON_IMAGE_URLS = {
-    'aioa-icon-type-1': 'https://www.skynettechnologies.com/sites/default/files/aioa-icon-type-1.svg',
-    'aioa-icon-type-2': 'https://www.skynettechnologies.com/sites/default/files/aioa-icon-type-2.svg',
-    'aioa-icon-type-3': 'https://www.skynettechnologies.com/sites/default/files/aioa-icon-type-3.svg',
-    'aioa-icon-type-4': 'https://www.skynettechnologies.com/sites/default/files/aioa-icon-type-4.svg',
-    'aioa-icon-type-5': 'https://www.skynettechnologies.com/sites/default/files/aioa-icon-type-5.svg',
-    'aioa-icon-type-6': 'https://www.skynettechnologies.com/sites/default/files/aioa-icon-type-6.svg',
-    'aioa-icon-type-7': 'https://www.skynettechnologies.com/sites/default/files/aioa-icon-type-7.svg',
-    'aioa-icon-type-8': 'https://www.skynettechnologies.com/sites/default/files/aioa-icon-type-8.svg',
-    'aioa-icon-type-9': 'https://www.skynettechnologies.com/sites/default/files/aioa-icon-type-9.svg',
-    'aioa-icon-type-10': 'https://www.skynettechnologies.com/sites/default/files/aioa-icon-type-10.svg',
-    'aioa-icon-type-11': 'https://www.skynettechnologies.com/sites/default/files/aioa-icon-type-11.svg',
-    'aioa-icon-type-12': 'https://www.skynettechnologies.com/sites/default/files/aioa-icon-type-12.svg',
-    'aioa-icon-type-13': 'https://www.skynettechnologies.com/sites/default/files/aioa-icon-type-13.svg',
-    'aioa-icon-type-14': 'https://www.skynettechnologies.com/sites/default/files/aioa-icon-type-14.svg',
-    'aioa-icon-type-15': 'https://www.skynettechnologies.com/sites/default/files/aioa-icon-type-15.svg',
-    'aioa-icon-type-16': 'https://www.skynettechnologies.com/sites/default/files/aioa-icon-type-16.svg',
-    'aioa-icon-type-17': 'https://www.skynettechnologies.com/sites/default/files/aioa-icon-type-17.svg',
-    'aioa-icon-type-18': 'https://www.skynettechnologies.com/sites/default/files/aioa-icon-type-18.svg',
-    'aioa-icon-type-19': 'https://www.skynettechnologies.com/sites/default/files/aioa-icon-type-19.svg',
-    'aioa-icon-type-20': 'https://www.skynettechnologies.com/sites/default/files/aioa-icon-type-20.svg',
-    'aioa-icon-type-21': 'https://www.skynettechnologies.com/sites/default/files/aioa-icon-type-21.svg',
-    'aioa-icon-type-22': 'https://www.skynettechnologies.com/sites/default/files/aioa-icon-type-22.svg',
-    'aioa-icon-type-23': 'https://www.skynettechnologies.com/sites/default/files/aioa-icon-type-23.svg',
-    'aioa-icon-type-24': 'https://www.skynettechnologies.com/sites/default/files/aioa-icon-type-24.svg',
-    'aioa-icon-type-25': 'https://www.skynettechnologies.com/sites/default/files/aioa-icon-type-25.svg',
-    'aioa-icon-type-26': 'https://www.skynettechnologies.com/sites/default/files/aioa-icon-type-26.svg',
-    'aioa-icon-type-27': 'https://www.skynettechnologies.com/sites/default/files/aioa-icon-type-27.svg',
-    'aioa-icon-type-28': 'https://www.skynettechnologies.com/sites/default/files/aioa-icon-type-28.svg',
-    'aioa-icon-type-29': 'https://www.skynettechnologies.com/sites/default/files/aioa-icon-type-29.svg',
-}
-# admin.py
-
-class IconImageRadioSelect(forms.RadioSelect):
-    class Media:
-        js = ('static/icon-radio.js',)  # load custom JS
-
-    def render(self, name, value, attrs=None, renderer=None):
-        output = []
-        for index, (opt_value, opt_label) in enumerate(self.choices):
-            selected = str(opt_value) == str(value)
-            output.append(self.render_option(name, opt_value, selected))
-
-        return mark_safe(f'''
-            <div style="
-                display: flex;
-                flex-wrap: wrap;
-                gap: 10px;
-                max-width: 920px;
-            ">
-                {''.join(output)}
-            </div>
-        ''')
-
-    def render_option(self, name, value, selected):
-        image_url = ICON_IMAGE_URLS.get(str(value), '')
-
-        border_color = '#137333' if selected else 'transparent'
-
-
-        card_style = (
-            'display:inline-block;text-align:center;margin:8px;padding:8px;'
-            'border-radius:10px;border:2px solid {border_color} ;position:relative;'
-            'min-width:130px !important; width:130px !important;height:130px;box-sizing:border-box;cursor:pointer;background:#3c007f;'
-        )
-
-        # Checkmark hidden unless selected
-        checkmark_display = 'flex' if selected else 'none'
-
-        checkmark_html = f'''
-            <span class="icon-checkmark" style="
-                position:absolute;
-                top:-32px;
-                right:-31px;
-                width:20px;
-                height:20px;
-                background:#137333;
-                color:white;
-                font-size:14px;
-                font-weight:bold;
-                border-radius:50%;
-                align-items:center;
-                justify-content:center;
-                z-index:2;
-                display:{checkmark_display};
-            ">✓</span>
-        '''
-
-        icon_html = f'''
-            <div style="width:70px;height:70px;border-radius:50%;
-                        display:flex;align-items:center;justify-content:center;margin:0 auto;position:relative;top:17%;">
-                <img src="{image_url}" width="65" height="65" style="z-index:1;" />
-                {checkmark_html}
-            </div>
-        '''
-        return mark_safe(f'''
-            <label class="icon-radio" style="{card_style}">
-                <input type="radio" name="{name}" value="{value}" {'checked' if selected else ''} style="display:none;" />
-                {icon_html}
-            </label>
-        ''')
-    
-
-class IconSizeWidget(forms.RadioSelect):
-    class Media:
-        js = ('static/icon-radio.js',)  # JS to toggle checkmarks
-
-    def render(self, name, value, attrs=None, renderer=None):
-        output = []
-        for index, (opt_value, opt_label) in enumerate(self.choices):
-            selected = str(opt_value) == str(value)
-            output.append(self.render_option(name, opt_value, opt_label, selected))
-
-        return mark_safe(f'''
-            <div style="display:flex;flex-wrap:wrap;gap:10px;max-width:920px;">
-                {''.join(output)}
-            </div>
-        ''')
-
-    def render_option(self, name, value, label, selected):
-        size_px = {
-            'aioa-big-icon': 75,
-            'aioa-medium-icon': 65,
-            'aioa-default-icon': 55,
-            'aioa-small-icon': 45,
-            'aioa-extra-small-icon': 35,
-        }.get(value, 55)
-
-
-        icon_type = 'aioa-icon-type-1'  
-        image_url = f"https://www.skynettechnologies.com/sites/default/files/{icon_type}.svg"
-
-        border_color = '#137333' if selected else 'transparent'
-        
-
-        card_style = (
-            f'display:inline-block;text-align:center;margin:8px;padding:8px;'
-            f'border-radius:10px;border:2px solid {border_color};position:relative;'
-            f'min-width:130px !important;width:130px !important;height:130px;'
-            f'box-sizing:border-box;cursor:pointer;background:#3c007f;'
-        )
-
-        label_class = 'icon-radio selected' if selected else 'icon-radio'
-    
-        checkmark_display = 'flex' if selected else 'none'
-
-        checkmark_html = f'''
-            <span class="icon-checkmark" style="
-                position:absolute;
-                top:-13px;
-                right:-15px;
-                width:20px;
-                height:20px;
-                background:#137333;
-                color:white;
-                font-size:14px;
-                font-weight:bold;
-                border-radius:50%;
-                align-items:center;
-                justify-content:center;
-                z-index:2;
-                display:{checkmark_display};
-            ">✓</span>
-        '''
-
-        icon_html = f'''
-            <div style="width:100%;height:100%;border-radius:50%;
-                        display:flex;align-items:center;justify-content:center;
-                        margin:0 auto;position:relative;">
-                <img class="csticontype" src="{image_url}" width="{size_px}" height="{size_px}" style="z-index:1; " />
-                {checkmark_html}
-            </div>
-        '''
-
-        return mark_safe(f'''
-            <label class="icon-radio" style="{card_style}">
-                <input type="radio" name="{name}" value="{value}" {'checked' if selected else ''} style="display:none;" />
-                {icon_html}
-                <br><span style="color:white;">{label}</span>
-            </label>
-        ''')
-
-    
+# Custom form to inject widgets and pass selected icon to size preview
 class AllInOneAccessibilityForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # Get icon image for current selection
+        icon_value = self.initial.get('aioa_icon_type') or self.instance.aioa_icon_type
+        icon_url = dict(ICON_CHOICES).get(icon_value, '')
+
+        # Set icon-size widget with correct icon preview
+        self.fields['aioa_icon_size'].widget = IconSizeSelectWidget(
+            choices=AIOA_ICON_SIZE_CHOICES,
+            icon_url=icon_url
+        )
+    def clean(self):
+        cleaned_data = super().clean()
+
+        # If precise positioning is disabled → force safe defaults
+        if not cleaned_data.get('enable_widget_icon_position'):
+            cleaned_data['to_the_right_px'] = 20
+            cleaned_data['to_the_right'] = 'to_the_left'
+            cleaned_data['to_the_bottom_px'] = 20
+            cleaned_data['to_the_bottom'] = 'to_the_bottom'
+           
+
+        # If custom icon size is disabled → force safe defaults
+        if not cleaned_data.get('enable_icon_custom_size'):
+            cleaned_data['aioa_size_value'] = 50
+            
+        return cleaned_data
+
     class Meta:
         model = AllInOneAccessibility
         fields = '__all__'
+        # Use custom radio-style widget for icon type
         widgets = {
-            'aioa_place': forms.RadioSelect,
-            'aioa_size': forms.RadioSelect,
-            'aioa_icon_type': IconImageRadioSelect,
-            'aioa_icon_size': IconSizeWidget,
-            'to_the_right_px': forms.NumberInput(attrs={'min': 0, 'max': 250}),
-            'to_the_bottom_px': forms.NumberInput(attrs={'min': 0, 'max': 250}),
-            'aioa_size_value': forms.NumberInput(attrs={'min': 20, 'max': 150})
+            'aioa_icon_type': IconSelectWidget(choices=ICON_CHOICES),
         }
 
-    
-        
-
-
+# Custom admin class to manage AllInOneAccessibility model
 class AllInOneAccessibilityAdmin(admin.ModelAdmin):
-    change_form_template = 'admin/accessibility/change_form.html'  # Custom template
+ 
     form = AllInOneAccessibilityForm
-
+    # Group form fields into logical sections (only one section here)
     fieldsets = (
         (None, {
             'fields': (
                 'aioa_color_code',
                 'enable_widget_icon_position',
-                ('to_the_right_px', 'to_the_right'),
-                ('to_the_bottom_px', 'to_the_bottom'),
+                ('to_the_right_px', 'to_the_right'),  # ← Inline row
+                ('to_the_bottom_px', 'to_the_bottom'),  # ← Inline row
                 'aioa_place',
                 'aioa_size',
                 'aioa_icon_type',
-                'aioa_icon_size',
                 'enable_icon_custom_size',
                 'aioa_size_value',
-                # add more fields here
-            ),
+                'aioa_icon_size',
+            )
         }),
     )
-
+    # Only allow a single instance of this model
     def has_add_permission(self, request):
-        # check if generally has add permission
-        retVal = super().has_add_permission(request)
-        # set add permission to False, if object already exists
-        if retVal and AllInOneAccessibility.objects.exists():
-            retVal = False
-        return retVal
-
+        # Only allow adding if no instance exists
+        if AllInOneAccessibility.objects.exists():
+            return False
+        return True
+    
+    # Always redirect from changelist view to the single instance edit page
+    def changelist_view(self, request, extra_context=None):
+        obj = AllInOneAccessibility.objects.first()
+        if obj:
+            return redirect(
+                reverse('admin:accessibility_allinoneaccessibility_change', args=(obj.pk,))
+            )
+        return super().changelist_view(request, extra_context)
+    
+    # Include custom JS and CSS in admin
+    class Media:
+        js = ('admin/js/aioa_accessibility.js',
+              'admin/js/aioa_icon_sync.js')
+        css = {
+            'all': ('admin/css/aioa_admin.css',)
+        }
+    
+    # Custom save behavior to send data to external API on save
     def save_model(self, request, obj, form, change):
-        obj.save()
-        domain = urlparse(request.build_absolute_uri())
-        domain_url = domain.scheme +'://'+domain.netloc
         
-        url = "https://ada.skynettechnologies.us/api/widget-setting-update-platform"
+        obj.save()
+        # Get current domain from request URL
+        domain = urlparse(request.build_absolute_uri())
+        domain_url = f"{domain.scheme}://{domain.hostname}"
+        
         # Build data conditionally
         data = {
             "u": domain_url,
@@ -259,10 +117,10 @@ class AllInOneAccessibilityAdmin(admin.ModelAdmin):
         # Handle position settings based on enable_widget_icon_position
         if not obj.enable_widget_icon_position:
             data.update({
-                "widget_position_top": 0,
-                "widget_position_right": 0,
-                "widget_position_bottom": 0,
-                "widget_position_left": 0,
+                "widget_position_top": None,
+                "widget_position_right": None,
+                "widget_position_bottom": None,
+                "widget_position_left": None,
                 "widget_position": obj.aioa_place, 
             })
             
@@ -270,10 +128,10 @@ class AllInOneAccessibilityAdmin(admin.ModelAdmin):
             
             # Initialize position with 0
             widget_position = {
-                "widget_position_top": 0,
-                "widget_position_right": 0,
-                "widget_position_bottom": 0,
-                "widget_position_left": 0,
+                "widget_position_top": None,
+                "widget_position_right": None,
+                "widget_position_bottom": None,
+                "widget_position_left": None,
             }
 
             # Horizontal position
@@ -315,20 +173,90 @@ class AllInOneAccessibilityAdmin(admin.ModelAdmin):
         
         ]
         headers = {}
+        # Send API request to external service (with fallback error handling)
+        url = "https://ada.skynettechnologies.us/api/widget-setting-update-platform"
         try:
             response = requests.request("POST", url, headers=headers, data=data, files=files)
-            response.raise_for_status()  # Raise exception if error
-        except requests.HTTPError as e:
-            error_body = ""
-            try:
-                error_body = response.json()  # Try to parse JSON error
-            except ValueError:
-                error_body = response.text  # Fall back to plain text if not JSON
+            response.raise_for_status()
+        except requests.RequestException as e:
+            if response is not None:
+                try:
+                    error_content = response.json()
+                except Exception:
+                    error_content = response.text
+            else:
+                error_content = str(e)
 
-    def changeform_view(self, request, object_id=None, form_url='', extra_context=None):
-        return super().changeform_view(request, object_id, form_url, extra_context=extra_context or {})
-    
 
+FLAG_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".accessibility_api_called.json")
+
+def call_accessibility_apis_once(request):
+    if os.path.exists(FLAG_FILE):
+        return
+
+    try:
+        # 1 First API: get JSON country data
+        headers = {}
+        response = requests.get("https://ipapi.co/json/", headers=headers, timeout=5)
+        in_eu = False
+        if response.status_code == 200:
+            in_eu = response.json().get("in_eu", False)
+
+        # 2 Second API: register domain
+        full_url = request.build_absolute_uri('/').rstrip('/')  
+        parsed = urlparse(full_url)
+        domain_url = f"{parsed.scheme}://{parsed.hostname}"       
+        domain_name = parsed.hostname      
+      
+        payload = {
+            "name": domain_name,
+            "email": f"no-reply@{domain_name}",
+            "company_name": "",
+            "website": base64.b64encode(domain_url.encode()).decode(),
+            "package_type": "free-widget",
+            "start_date": datetime.utcnow().isoformat(),
+            "end_date": "",
+            "price": "",
+            "discount_price": "0",
+            "platform": "Django",
+            "api_key": "",
+            "is_trial_period": "",
+            "is_free_widget": "1",
+            "bill_address": "",
+            "country": "",
+            "state": "",
+            "city": "",
+            "post_code": "",
+            "transaction_id": "",
+            "subscr_id": "",
+            "payment_source": "",
+            "no_required_eu": 1 if not in_eu else 0
+        }
+     
+        register_resp = requests.post("https://ada.skynettechnologies.us/api/add-user-domain", data=payload, headers=headers)
+        # Save flag file so this never runs again
+        with open(FLAG_FILE, "w") as f:
+            json.dump({
+                "called": True,
+                "no_required_eu": 1 if not in_eu else 0 
+            }, f)
+
+    except Exception as e:
+        error_content = str(e)
+
+
+# ---------------- Patch changelist_view AFTER class definition ----------------
+original_changelist_view = AllInOneAccessibilityAdmin.changelist_view
+
+def patched_changelist_view(self, request, extra_context=None):
+    # Run API in background thread, only once
+    threading.Thread(target=call_accessibility_apis_once, args=(request,), daemon=True).start()
+
+    # Call original changelist view
+    return original_changelist_view(self, request, extra_context)
+
+# Patch the method directly
+AllInOneAccessibilityAdmin.changelist_view = patched_changelist_view
+
+# Register the model with the custom admin class
 admin.site.register(AllInOneAccessibility, AllInOneAccessibilityAdmin)
-
-

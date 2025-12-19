@@ -1,0 +1,70 @@
+/* Icon option styling */
+.icon-option {
+    background-color: #4B0082;
+    width: 115px !important;
+    height: 115px; 
+    min-width: 115px !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    position: relative;
+    transition: border-color 0.2s ease;
+    margin: 12px 12px 30px;
+}
+
+/* Icon inside each option */
+.icon-option img.aioa-icon-img {
+    width: 65px;
+    height: 65px;
+}
+
+/* Hide the radio input visually */
+.icon-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Checkmark (hidden by default) */
+.icon-option .checkmark {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 12px;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    text-align: center;
+    border-radius: 50%;
+    display: none;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+}
+
+/* When selected, show green border + checkmark */
+.icon-option.selected {
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px #4CAF50;
+}
+
+.icon-option.selected .checkmark {
+    display: block;
+}
+
+/* Layout wrappers for icon selection */
+.icon-select-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    width: 56%;
+}
+
+
+.icon-size-select-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    width: 56%;
+}
