@@ -1,4 +1,22 @@
-# Include all templates and static files
+# Documentation
+include README.md
+include CHANGELOG.md
+include LICENSE
+
+# Static files and templates
 recursive-include accessibility/static *
 recursive-include accessibility/templates *
-include README.md
+
+# Migrations
+recursive-include accessibility/migrations *.py
+
+# Exclude unwanted files
+global-exclude __pycache__
+global-exclude *.py[co]
+global-exclude .DS_Store
+global-exclude *.swp
+global-exclude *.orig
+global-exclude *~
+
+# Python source files (explicit inclusion for sdist)
+recursive-include accessibility *.py

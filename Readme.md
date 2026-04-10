@@ -1,8 +1,8 @@
 ## Compatibility
 ### Version Support
 
-![Python](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12-blue)
-![Django](https://img.shields.io/badge/django-4.0%20%7C%204.1%20%7C%204.2%20%7C%205.0%20%7C%205.1%20%7C%205.2-blue)
+![Python](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue)
+![Django](https://img.shields.io/badge/django-4.0%20%7C%204.1%20%7C%204.2%20%7C%205.0%20%7C%205.1%20%7C%205.2%20%7C%206.0-blue)
 ![Django CMS](https://img.shields.io/badge/django--cms-4.1.x%20%7C%205.0.0-blue)
 ![Django Oscar](https://img.shields.io/badge/django--oscar-3.2.x%20%7C%204.0-blue)
 
@@ -14,7 +14,9 @@ If badges above do not display correctly, please refer to the table below:
 
 | **Python Versions**       | **Django Versions**                  | **Django CMS**           | **Django Oscar**       |
 |---------------------------|--------------------------------------|--------------------------|------------------------|
-| 3.10, 3.11, 3.12          | 4.0, 4.1, 4.2, 5.0, 5.1, 5.2         | 4.1.x (LTS), 5.0.0       | 3.2.x, 4.0             |
+| 3.10, 3.11, 3.12, 3.13    | 4.0, 4.1, 4.2, 5.0, 5.1, 5.2, 6.0    | 4.1.x (LTS), 5.0.0       | 3.2.x, 4.0             |
+
+> **Note:** Django 6.0 requires Python 3.12 or higher.
 
 
 # All in One Accessibility®

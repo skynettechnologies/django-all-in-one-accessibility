@@ -1,3 +1,4 @@
+LICENSE
 MANIFEST.in
 README.md
 setup.cfg
@@ -8,21 +9,15 @@ accessibility/apps.py
 accessibility/context_processors.py
 accessibility/forms.py
 accessibility/models.py
+accessibility/registration.py
 accessibility/tests.py
-accessibility/urls.py
 accessibility/views.py
 accessibility/migrations/0001_initial.py
-accessibility/migrations/0002_alter_allinoneaccessibility_aioa_place.py
 accessibility/migrations/__init__.py
 accessibility/static/admin/css/aioa_admin.css
 accessibility/static/admin/js/aioa_accessibility.js
 accessibility/static/admin/js/aioa_icon_sync.js
 accessibility/templates/home.html
-django_all_in_one_accessibility/__init__.py
-django_all_in_one_accessibility/asgi.py
-django_all_in_one_accessibility/settings.py
-django_all_in_one_accessibility/urls.py
-django_all_in_one_accessibility/wsgi.py
 django_all_in_one_accessibility.egg-info/PKG-INFO
 django_all_in_one_accessibility.egg-info/SOURCES.txt
 django_all_in_one_accessibility.egg-info/dependency_links.txt

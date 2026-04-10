@@ -44,11 +44,11 @@ ICON_CHOICES = [
 ]
 
   
-class AllInOneAccessibility(models.Model):
+class AllinOneAccessibility(models.Model):
     aioa_color_code = models.CharField(
         max_length=50,
         blank=True,
-        default='',
+        default='420083',
         verbose_name='Hex Color Code',
         help_text='Customize the ADA Widget color. Example: #FF5733'
     )
@@ -127,9 +127,9 @@ class AllInOneAccessibility(models.Model):
     )
     
     def __str__(self):
-        return "All In One Accessibility"
+        return "All in One Accessibility"
     
     class Meta:
-        verbose_name = "All In One Accessibility"
-        verbose_name_plural = "All In One Accessibility"
+        verbose_name = "All in One Accessibility"
+        verbose_name_plural = "All in One Accessibility"
 

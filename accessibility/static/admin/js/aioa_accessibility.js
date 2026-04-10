@@ -5,6 +5,12 @@ document.addEventListener('DOMContentLoaded', function () {
         const enablePosition = document.querySelector('#id_enable_widget_icon_position');
         const enableCustomSize = document.querySelector('#id_enable_icon_custom_size');
 
+        // Exit early if toggles don't exist
+        if (!enablePosition || !enableCustomSize) {
+            console.warn('AIOA: Toggle checkboxes not found');
+            return;
+        }
+
         // Position-related fields
         const rightPx = document.querySelector('.form-row.field-to_the_right_px');
         const rightDir = document.querySelector('.form-row.field-to_the_right');
@@ -16,35 +22,59 @@ document.addEventListener('DOMContentLoaded', function () {
         const iconSizeVal = document.querySelector('.form-row.field-aioa_size_value');
         const iconSizeSel = document.querySelector('.form-row.field-aioa_icon_size');
 
-        // Toggle position fields
+        // Toggle position fields with null checks
         if (enablePosition.checked) {
-            rightPx.style.display = '';
-            rightDir.style.display = '';
-            bottomPx.style.display = '';
-            bottomDir.style.display = '';
-            positionField.style.display = 'none';
+            if (rightPx) rightPx.style.display = '';
+            if (rightDir) rightDir.style.display = '';
+            if (bottomPx) bottomPx.style.display = '';
+            if (bottomDir) bottomDir.style.display = '';
+            if (positionField) positionField.style.display = 'none';
         } else {
-            rightPx.style.display = 'none';
-            rightDir.style.display = 'none';
-            bottomPx.style.display = 'none';
-            bottomDir.style.display = 'none';
-            positionField.style.display = '';
+            if (rightPx) rightPx.style.display = 'none';
+            if (rightDir) rightDir.style.display = 'none';
+            if (bottomPx) bottomPx.style.display = 'none';
+            if (bottomDir) bottomDir.style.display = 'none';
+            if (positionField) positionField.style.display = '';
         }
 
-        // Toggle icon size fields
+        // Toggle icon size fields with null checks
         if (enableCustomSize.checked) {
-            iconSizeVal.style.display = '';
-            iconSizeSel.style.display = 'none';
+            if (iconSizeVal) iconSizeVal.style.display = '';
+            if (iconSizeSel) iconSizeSel.style.display = 'none';
         } else {
-            iconSizeVal.style.display = 'none';
-            iconSizeSel.style.display = '';
+            if (iconSizeVal) iconSizeVal.style.display = 'none';
+            if (iconSizeSel) iconSizeSel.style.display = '';
         }
     };
 
     // Initial toggle
-    toggleFields();
+    try {
+        toggleFields();
+    } catch (error) {
+        console.error('AIOA: Error during initial field toggle:', error);
+    }
 
-    // Add event listeners
-    document.querySelector('#id_enable_widget_icon_position').addEventListener('change', toggleFields);
-    document.querySelector('#id_enable_icon_custom_size').addEventListener('change', toggleFields);
+    // Add event listeners with error handling
+    const enablePositionCheckbox = document.querySelector('#id_enable_widget_icon_position');
+    const enableCustomSizeCheckbox = document.querySelector('#id_enable_icon_custom_size');
+    
+    if (enablePositionCheckbox) {
+        enablePositionCheckbox.addEventListener('change', function() {
+            try {
+                toggleFields();
+            } catch (error) {
+                console.error('AIOA: Error toggling position fields:', error);
+            }
+        });
+    }
+    
+    if (enableCustomSizeCheckbox) {
+        enableCustomSizeCheckbox.addEventListener('change', function() {
+            try {
+                toggleFields();
+            } catch (error) {
+                console.error('AIOA: Error toggling icon size fields:', error);
+            }
+        });
+    }
 });

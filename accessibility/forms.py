@@ -33,7 +33,7 @@ class IconSizeSelectWidget(forms.Widget):
 
     def render(self, name, value, attrs=None, renderer=None):
         size_map = {
-            'aioa-big-icon': 75,
+            'aioa-big-icon': 85,
             'aioa-medium-icon': 65,
             'aioa-default-icon': 55,
             'aioa-small-icon': 45,
