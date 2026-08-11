@@ -11,6 +11,13 @@ import base64
 import requests
 from datetime import datetime
 
+# Default python-requests User-Agent gets throttled (429) by the Skynet API's
+# WAF/rate-limiter. Sending a normal, identifiable UA avoids that.
+_REQUEST_HEADERS = {
+    "User-Agent": "AIOA-Django-Plugin/3.0.3 (+https://ada.skynettechnologies.us)",
+    "Accept": "*/*",
+}
+
 
 def _get_flag_file():
     """
@@ -28,9 +35,32 @@ def _get_flag_file():
     return os.path.join(os.path.dirname(os.path.abspath(__file__)), ".accessibility_api_called.json")
 
 
+def _is_valid_registration(info):
+    """
+    A domain is only genuinely registered if the recorded response was an
+    actual HTTP 200 — mirrors the guard in the Shopyo plugin's
+    _register_domain(), which never persists a non-200 result at all.
+
+    Older versions of this plugin could persist a domain with
+    api_called: True even when status_code was 429 (or another non-200),
+    which permanently blocked any retry — the domain looked "done" forever
+    even though add-user-domain never actually succeeded for it. Treat any
+    entry that isn't a clean 200 as unregistered so it gets retried and the
+    flag file self-heals instead of requiring a manual edit.
+    """
+    return isinstance(info, dict) and info.get("api_called") is True and info.get("status_code") == 200
+
+
 def _read_flag():
-    """Returns dict of already-registered domains: {domain_name: info}"""
+    """
+    Returns dict of already-registered domains: {domain_name: info}.
+    Filters out any stale/corrupted entries that aren't a genuine HTTP 200
+    registration (see _is_valid_registration) so they're retried instead
+    of staying stuck forever.
+    """
     flag_file = _get_flag_file()
+    raw = {}
+
     if not os.path.exists(flag_file):
         # Also check legacy package-dir location for upgrades
         legacy = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".accessibility_api_called.json")
@@ -39,19 +69,32 @@ def _read_flag():
                 with open(legacy, "r") as f:
                     data = json.load(f)
                 if isinstance(data, dict) and "domain" in data and "domains" not in data:
-                    return {data["domain"]: data}
-                return data.get("domains", {})
+                    raw = {data["domain"]: data}
+                else:
+                    raw = data.get("domains", {})
             except Exception:
-                return {}
-        return {}
-    try:
-        with open(flag_file, "r") as f:
-            data = json.load(f)
-        if isinstance(data, dict) and "domain" in data and "domains" not in data:
-            return {data["domain"]: data}
-        return data.get("domains", {})
-    except Exception:
-        return {}
+                raw = {}
+    else:
+        try:
+            with open(flag_file, "r") as f:
+                data = json.load(f)
+            if isinstance(data, dict) and "domain" in data and "domains" not in data:
+                raw = {data["domain"]: data}
+            else:
+                raw = data.get("domains", {})
+        except Exception:
+            raw = {}
+
+    cleaned = {name: info for name, info in raw.items() if _is_valid_registration(info)}
+
+    dropped = set(raw) - set(cleaned)
+    if dropped:
+        # Persist the repair immediately so the corrupted entries don't
+        # keep coming back on every subsequent read.
+        print(f"[AIOA] Dropping stale/invalid registration entries for retry: {sorted(dropped)}")
+        _write_flag(cleaned)
+
+    return cleaned
 
 
 def _write_flag(domains):
@@ -66,7 +109,9 @@ def register_domain_on_install():
     Called from post_migrate signal (apps.py).
     Loops over ALL valid domains in ALLOWED_HOSTS.
     - Already registered → skipped
-    - New domain → calls add-user-domain → marks as registered
+    - New domain, success (HTTP 200) → marks as registered
+    - New domain, failure (429 / other non-200 / network error) → NOT marked,
+      so it will be retried automatically on the next migrate/restart
     """
     all_domains = _get_all_domains_from_settings()
 
@@ -111,27 +156,35 @@ def register_domain_on_install():
             response = requests.post(
                 "https://ada.skynettechnologies.us/api/add-user-domain",
                 data=payload,
+                headers=_REQUEST_HEADERS,
                 timeout=10,
             )
 
-            registered[domain_name] = {
-                "api_called":     True,
-                "registered_at":  datetime.utcnow().isoformat(),
-                "domain_url":     domain_url,
-                "no_required_eu": no_required_eu,
-                "status_code":    response.status_code,
-            }
-            changed = True
-            print(f"[AIOA] ✓ Registered: {domain_name} (HTTP {response.status_code})")
+            if response.status_code == 200:
+                # Only mark as registered on real success.
+                registered[domain_name] = {
+                    "api_called":     True,
+                    "registered_at":  datetime.utcnow().isoformat(),
+                    "domain_url":     domain_url,
+                    "no_required_eu": no_required_eu,
+                    "status_code":    response.status_code,
+                }
+                changed = True
+                print(f"[AIOA] ✓ Registered: {domain_name} (HTTP {response.status_code})")
+            else:
+                # Non-200 (e.g. 429) — don't mark as registered.
+                # Leaving it out of `registered` means it will be retried
+                # automatically on the next migrate/restart instead of
+                # being silently stuck forever.
+                print(
+                    f"[AIOA] ✗ Registration failed for {domain_name}: "
+                    f"HTTP {response.status_code} — will retry next run"
+                )
 
         except Exception as e:
-            registered[domain_name] = {
-                "api_called":    True,
-                "registered_at": datetime.utcnow().isoformat(),
-                "error":         str(e),
-            }
-            changed = True
-            print(f"[AIOA] ✗ Registration failed for {domain_name}: {e}")
+            # Network-level failure (timeout, DNS, connection error, etc.)
+            # Also NOT marked as registered, so it retries next run.
+            print(f"[AIOA] ✗ Registration failed for {domain_name}: {e} — will retry next run")
 
     if changed:
         _write_flag(registered)
@@ -140,7 +193,7 @@ def register_domain_on_install():
 def _detect_eu():
     """Returns True if the server is in an EU country."""
     try:
-        resp = requests.get("https://ipapi.co/json/", timeout=5)
+        resp = requests.get("https://ipapi.co/json/", headers=_REQUEST_HEADERS, timeout=5)
         if resp.status_code == 200:
             return resp.json().get("in_eu", False)
     except Exception:

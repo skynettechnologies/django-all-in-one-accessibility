@@ -8,6 +8,7 @@ from django.urls import reverse
 
 from .models import AllinOneAccessibility, ICON_CHOICES, AIOA_ICON_SIZE_CHOICES
 from .forms import IconSelectWidget, IconSizeSelectWidget
+from .registration import _REQUEST_HEADERS
 
 
 class AllinOneAccessibilityForm(forms.ModelForm):
@@ -70,8 +71,13 @@ class AllinOneAccessibilityAdmin(admin.ModelAdmin):
         """Saves settings and syncs to widget-setting-update-platform."""
         obj.save()
 
+        # Use the same scheme (https) that registration.py used when it
+        # registered this domain via /api/add-user-domain. request.scheme
+        # can be http on local/dev setups, which produced a domain_url
+        # that didn't match the registered record, so the settings sync
+        # silently updated nothing.
         domain = urlparse(request.build_absolute_uri())
-        domain_url = f"{domain.scheme}://{domain.hostname}"
+        domain_url = f"https://{domain.hostname}"
 
         data = {
             "u":                         domain_url,
@@ -115,14 +121,27 @@ class AllinOneAccessibilityAdmin(admin.ModelAdmin):
             })
 
         try:
-            requests.post(
+            resp = requests.post(
                 "https://ada.skynettechnologies.us/api/widget-setting-update-platform",
                 json=data,
-                headers={"Content-Type": "application/json"},
+                headers={**_REQUEST_HEADERS, "Content-Type": "application/json"},
                 timeout=10,
             )
-        except Exception:
-            pass  # Sync failure is non-fatal — settings are saved to DB regardless
+            if resp.status_code != 200:
+                # Sync failure is still non-fatal to the local save, but we
+                # log it now so a mismatched/unregistered domain (or any
+                # other remote-side rejection) is visible in the console
+                # instead of failing silently while the admin shows
+                # "changed successfully".
+                print(
+                    f"[AIOA] ✗ Settings sync failed for {domain_url}: "
+                    f"HTTP {resp.status_code} — {resp.text[:300]}"
+                )
+            else:
+                print(f"[AIOA] ✓ Settings synced for {domain_url}")
+        except Exception as e:
+            print(f"[AIOA] ✗ Settings sync error for {domain_url}: {e}")
+            # Sync failure is non-fatal — settings are saved to DB regardless
 
 
 admin.site.register(AllinOneAccessibility, AllinOneAccessibilityAdmin)

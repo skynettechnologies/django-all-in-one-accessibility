@@ -1,5 +1,43 @@
 // Wait for DOM to be ready
 document.addEventListener('DOMContentLoaded', function () {
+    // Insert the upgrade/notice banner at the top of the settings form
+    const insertNoticeBanner = () => {
+        if (document.querySelector('.aioa-card')) {
+            return; // already inserted
+        }
+
+        const fieldset = document.querySelector('#content-main form fieldset')
+            || document.querySelector('.module.aligned')
+            || document.querySelector('#content-main form');
+
+        if (!fieldset) {
+            return;
+        }
+
+        const noticeHTML = `
+<p class="aioa-card" style="margin: 0 0 6px 0; color: inherit; font-size: 0.9rem; line-height: 1.55;">
+  <strong>NOTE:</strong>
+  Currently, All in One Accessibility is dedicated to enhancing accessibility specifically for
+  websites and online stores. Please upgrade to the full version of
+  <a href="https://ada.skynettechnologies.us/trial-subscription" target="_blank"
+     style="color: #9b6dff; font-weight: 600; text-decoration: underline;">
+    All in One Accessibility Pro with 10 days free trial
+  </a>.
+</p>
+<p class="aioa-card" style="margin: 0 0 16px 0; color: inherit; font-size: 0.9rem; line-height: 1.55; opacity: 0.85;">
+  It may take a few seconds for changes to appear on your website. If you don't see the
+  changes, try clearing your browser cache or checking in a private browsing window.
+</p>`;
+
+        fieldset.insertAdjacentHTML('beforebegin', noticeHTML);
+    };
+
+    try {
+        insertNoticeBanner();
+    } catch (error) {
+        console.error('AIOA: Error inserting notice banner:', error);
+    }
+
     const toggleFields = () => {
         // Get toggle field elements
         const enablePosition = document.querySelector('#id_enable_widget_icon_position');
