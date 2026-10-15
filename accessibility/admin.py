@@ -1,5 +1,6 @@
+import logging
+
 import requests
-from urllib.parse import urlparse
 
 from django.contrib import admin
 from django import forms
@@ -8,7 +9,11 @@ from django.urls import reverse
 
 from .models import AllinOneAccessibility, ICON_CHOICES, AIOA_ICON_SIZE_CHOICES
 from .forms import IconSelectWidget, IconSizeSelectWidget
-from .registration import _REQUEST_HEADERS
+from .registration import (
+    _REQUEST_HEADERS, WIDGET_SETTINGS_URL, get_canonical_domain, register_current_domain,
+)
+
+logger = logging.getLogger("accessibility")
 
 
 class AllinOneAccessibilityForm(forms.ModelForm):
@@ -31,6 +36,7 @@ class AllinOneAccessibilityForm(forms.ModelForm):
 
 class AllinOneAccessibilityAdmin(admin.ModelAdmin):
     form = AllinOneAccessibilityForm
+    change_form_template = 'admin/accessibility/allinoneaccessibility/change_form.html'
 
     fieldsets = (
         (None, {
@@ -52,11 +58,37 @@ class AllinOneAccessibilityAdmin(admin.ModelAdmin):
     )
 
     class Media:
-        js = ('admin/js/aioa_accessibility.js', 'admin/js/aioa_icon_sync.js')
+        js = (
+            'admin/js/aioa_accessibility.js',
+            'admin/js/aioa_icon_sync.js',
+            'admin/js/aioa_dashboard_sync.js',  # must stay last: reacts to the handlers above
+        )
         css = {'all': ('admin/css/aioa_admin.css',)}
 
     def has_add_permission(self, request):
         return not AllinOneAccessibility.objects.exists()
+
+    def changeform_view(self, request, object_id=None, form_url='', extra_context=None):
+        """
+        Opening the settings form registers THIS domain once (no-op when it is
+        already registered). Mirrors the Odoo module: registration is tied to
+        the admin opening the settings page, never to startup or a loop.
+        """
+        if request.method == 'GET' and self.has_change_permission(request):
+            register_current_domain(request)
+
+        # Config for aioa_dashboard_sync.js: which domain to read the
+        # dashboard settings for (same canonical domain used for registration
+        # and the save sync) and where to read them from.
+        _, hostname = get_canonical_domain(request)
+        extra_context = {
+            **(extra_context or {}),
+            'aioa_config': {
+                'domain': hostname,
+                'widgetSettingsUrl': WIDGET_SETTINGS_URL,
+            },
+        }
+        return super().changeform_view(request, object_id, form_url, extra_context)
 
     def changelist_view(self, request, extra_context=None):
         """Redirect to single settings object, or show add page if none exists."""
@@ -71,13 +103,10 @@ class AllinOneAccessibilityAdmin(admin.ModelAdmin):
         """Saves settings and syncs to widget-setting-update-platform."""
         obj.save()
 
-        # Use the same scheme (https) that registration.py used when it
-        # registered this domain via /api/add-user-domain. request.scheme
-        # can be http on local/dev setups, which produced a domain_url
-        # that didn't match the registered record, so the settings sync
-        # silently updated nothing.
-        domain = urlparse(request.build_absolute_uri())
-        domain_url = f"https://{domain.hostname}"
+        # Same canonical key (https + hostname, or AIOA_DOMAIN) that
+        # registration.py registered this domain under, so the sync always
+        # hits the registered record.
+        domain_url, _hostname = get_canonical_domain(request)
 
         data = {
             "u":                         domain_url,
@@ -133,14 +162,14 @@ class AllinOneAccessibilityAdmin(admin.ModelAdmin):
                 # other remote-side rejection) is visible in the console
                 # instead of failing silently while the admin shows
                 # "changed successfully".
-                print(
-                    f"[AIOA] ✗ Settings sync failed for {domain_url}: "
-                    f"HTTP {resp.status_code} — {resp.text[:300]}"
+                logger.warning(
+                    "[AIOA] Settings sync failed for %s: HTTP %s - %s",
+                    domain_url, resp.status_code, resp.text[:300],
                 )
             else:
-                print(f"[AIOA] ✓ Settings synced for {domain_url}")
+                logger.info("[AIOA] Settings synced for %s", domain_url)
         except Exception as e:
-            print(f"[AIOA] ✗ Settings sync error for {domain_url}: {e}")
+            logger.warning("[AIOA] Settings sync error for %s: %s", domain_url, e)
             # Sync failure is non-fatal — settings are saved to DB regardless
 
 

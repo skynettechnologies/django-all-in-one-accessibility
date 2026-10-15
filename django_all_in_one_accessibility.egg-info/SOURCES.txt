@@ -10,14 +10,14 @@ accessibility/context_processors.py
 accessibility/forms.py
 accessibility/models.py
 accessibility/registration.py
-accessibility/tests.py
-accessibility/views.py
 accessibility/migrations/0001_initial.py
+accessibility/migrations/0002_aioadomainregistration.py
 accessibility/migrations/__init__.py
 accessibility/static/admin/css/aioa_admin.css
 accessibility/static/admin/js/aioa_accessibility.js
+accessibility/static/admin/js/aioa_dashboard_sync.js
 accessibility/static/admin/js/aioa_icon_sync.js
-accessibility/templates/home.html
+accessibility/templates/admin/accessibility/allinoneaccessibility/change_form.html
 django_all_in_one_accessibility.egg-info/PKG-INFO
 django_all_in_one_accessibility.egg-info/SOURCES.txt
 django_all_in_one_accessibility.egg-info/dependency_links.txt

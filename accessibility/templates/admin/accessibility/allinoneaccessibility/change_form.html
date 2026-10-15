@@ -1,0 +1,8 @@
+{% extends "admin/change_form.html" %}
+{% comment %}
+  Passes the domain/endpoint config to static/admin/js/aioa_dashboard_sync.js
+  (which reads it from the <script id="aioa-config"> element).
+{% endcomment %}
+{% block extrahead %}{{ block.super }}
+{% if aioa_config %}{{ aioa_config|json_script:"aioa-config" }}{% endif %}
+{% endblock %}

@@ -133,3 +133,27 @@ class AllinOneAccessibility(models.Model):
         verbose_name = "All in One Accessibility"
         verbose_name_plural = "All in One Accessibility"
 
+
+
+class AioaDomainRegistration(models.Model):
+    """
+    One row per domain registered with Skynet's add-user-domain API.
+    Registration happens only when an admin opens the settings page (see
+    registration.py); this table is the single source of truth for "already
+    registered", the attempt count and the last API status, so duplicate
+    registrations can be audited and prevented.
+    """
+    domain = models.CharField(max_length=255, unique=True)
+    registered = models.BooleanField(default=False)
+    attempts = models.PositiveSmallIntegerField(default=0)
+    no_required_eu = models.PositiveSmallIntegerField(default=1)
+    last_status_code = models.PositiveSmallIntegerField(null=True, blank=True)
+    last_attempt_at = models.DateTimeField(null=True, blank=True)
+    registered_at = models.DateTimeField(null=True, blank=True)
+
+    def __str__(self):
+        return self.domain
+
+    class Meta:
+        verbose_name = "AIOA domain registration"
+        verbose_name_plural = "AIOA domain registrations"

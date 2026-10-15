@@ -1,6 +1,5 @@
 # Documentation
 include README.md
-include CHANGELOG.md
 include LICENSE
 
 # Static files and templates

@@ -1,24 +1,3 @@
-## Compatibility
-### Version Support
-
-![Python](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue)
-![Django](https://img.shields.io/badge/django-4.0%20%7C%204.1%20%7C%204.2%20%7C%205.0%20%7C%205.1%20%7C%205.2%20%7C%206.0-blue)
-![Django CMS](https://img.shields.io/badge/django--cms-4.1.x%20%7C%205.0.0-blue)
-![Django Oscar](https://img.shields.io/badge/django--oscar-3.2.x%20%7C%204.0-blue)
-
----
-
-### Compatibility Table
-
-If badges above do not display correctly, please refer to the table below:
-
-| **Python Versions**       | **Django Versions**                  | **Django CMS**           | **Django Oscar**       |
-|---------------------------|--------------------------------------|--------------------------|------------------------|
-| 3.10, 3.11, 3.12, 3.13    | 4.0, 4.1, 4.2, 5.0, 5.1, 5.2, 6.0    | 4.1.x (LTS), 5.0.0       | 3.2.x, 4.0             |
-
-> **Note:** Django 6.0 requires Python 3.12 or higher.
-
-
 # All in One Accessibility®
 
 ## Enhance Your Website's Accessibility with All in One Accessibility®
@@ -150,6 +129,27 @@ For more details, visit **[All in One Accessibility®](https://www.skynettechnol
 ### Supported Languages (140+ Languages)
 
 English (USA), English (UK), English (Australian), English (Canadian), English (South Africa), Español, Español (Mexicano), Deutsch, عربى, Português, Português (Brazil), 日本語, Français, Italiano, Polski, Pусский, 中文, 中文 (Traditional), עִברִית, Magyar, Slovenčina, Suomenkieli, Türkçe, Ελληνικά, Latinus, Български, Català, Čeština, Dansk, Nederlands, हिंदी, Bahasa Indonesia, 한국인, Lietuvių, Bahasa Melayu, Norsk, Română, Slovenščina, Svenska, แบบไทย, Українська, Việt Nam, বাঙালি, සිංහල, አማርኛ, Hmoob, မြန်မာ, Eesti keel, latviešu, Cрпски, Hrvatski, ქართული, ʻŌlelo Hawaiʻi, Cymraeg, Cebuano, Samoa, Kreyòl ayisyen, Føroyskt, Crnogorski, Azerbaijani, Euskara, Tagalog, Galego, Norsk Bokmål, فارسی, ਪੰਜਾਬੀ, shqiptare, Hայերեն, অসমীয়া, Aymara, Bamanankan, беларускі, bosanski, Corsu, ދިވެހި, Esperanto, Eʋegbe, Frisian, guarani, ગુજરાતી, Hausa, íslenskur, Igbo, Gaeilge, basa jawa, ಕನ್ನಡ, қазақ, ខ្មែរ, Kinyarwanda, Kurdî, Кыргызча, ພາສາລາວ, Lingala, Luganda, lëtzebuergesch, македонски, Malagasy, മലയാളം, Malti, Maori, मराठी, Монгол, नेपाली, Sea, ଓଡିଆ, Afaan Oromoo, پښتو, Runasimi, संस्कृत, Gàidhlig na h-Alba, Sesotho, Shona, سنڌي, Soomaali, basa Sunda, kiswahili, тоҷикӣ, தமிழ், Татар, తెలుగు, ትግሪኛ, Tsonga, Türkmenler, Ride, اردو, ئۇيغۇر, o'zbek, isiXhosa, יידיש, Yoruba, Zulu, भोजपुरी, डोगरी, कोंकणी, Kurdî, Krio, मैथिली, Meiteilon, Mizo tawng, Sepedi, Ilocano, دری.
+
+## Compatibility
+### Version Support
+
+![Python](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue)
+![Django](https://img.shields.io/badge/django-4.0%20%7C%204.1%20%7C%204.2%20%7C%205.0%20%7C%205.1%20%7C%205.2%20%7C%206.0-blue)
+![Django CMS](https://img.shields.io/badge/django--cms-4.1.x%20%7C%205.0.0-blue)
+![Django Oscar](https://img.shields.io/badge/django--oscar-3.2.x%20%7C%204.0-blue)
+
+---
+
+### Compatibility Table
+
+If badges above do not display correctly, please refer to the table below:
+
+| **Python Versions**       | **Django Versions**                  | **Django CMS**           | **Django Oscar**       |
+|---------------------------|--------------------------------------|--------------------------|------------------------|
+| 3.10, 3.11, 3.12, 3.13    | 4.0, 4.1, 4.2, 5.0, 5.1, 5.2, 6.0    | 4.1.x (LTS), 5.0.0       | 3.2.x, 4.0             |
+
+> **Note:** Django 6.0 requires Python 3.12 or higher.
+
 
 
 #### You can use this package in Django/Django-CMS/Django-Oscar
